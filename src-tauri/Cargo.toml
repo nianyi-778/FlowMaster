@@ -1,7 +1,7 @@
 [package]
-name = "tauri-app"
+name = "SharpEdge"
 version = "0.0.0"
-description = "A Tauri App"
+description = "打工人高效率工具"
 authors = ["you"]
 edition = "2021"
 
