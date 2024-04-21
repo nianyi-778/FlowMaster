@@ -1,4 +1,4 @@
-import { Button, Form, Input, Tag } from 'antd';
+import { Button, Form, Input } from 'antd';
 export default function QuadrantsItem() {
     const [form] = Form.useForm();
     // bg-white h-full rounded-[20px] p-[10px]

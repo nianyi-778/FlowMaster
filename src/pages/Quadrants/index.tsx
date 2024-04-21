@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom"
 import { homeConfig } from '@/constants/config';
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import styles from './index.module.less';
-import QuadrantsEmpty from "./components/QuadrantsEmpty";
+// import QuadrantsEmpty from "./components/QuadrantsEmpty";
 import QuadrantsItem from "./components/QuadrantsItem";
 import LeftMenu from "@/components/Layout/LeftMenu";
 import { PlusCircleTwoTone } from "@ant-design/icons";
@@ -11,7 +11,6 @@ import { PlusCircleTwoTone } from "@ant-design/icons";
 
 export default function Quadrants() {
     const { type } = useParams();
-    const [open, setOpen] = useState(false);
     const item = useMemo(() => {
         if (type) {
             return homeConfig.find(config => config.id === +type)
@@ -20,7 +19,6 @@ export default function Quadrants() {
     }, [type])
 
     const onAdd = useCallback(() => {
-        setOpen(true);
     }, [])
 
     console.log(item);
