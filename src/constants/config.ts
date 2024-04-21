@@ -43,3 +43,26 @@ export const homeConfig = [
     id: 6,
   },
 ];
+
+export const quadrantsConfig = [
+  {
+    title: "I、重要且紧急",
+    id: 1,
+    color: "red",
+  },
+  {
+    title: "II、重要不紧急",
+    id: 2,
+    color: "yellow",
+  },
+  {
+    title: "III、不重要紧急",
+    id: 3,
+    color: "blue",
+  },
+  {
+    title: "IV、不重要不紧急",
+    id: 4,
+    color: "green",
+  },
+];

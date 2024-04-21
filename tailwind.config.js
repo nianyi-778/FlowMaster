@@ -2,7 +2,12 @@
 export default {
   content: ["./src/**/*.{html,tsx,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "sans": ["LXGW WenKai Screen", 'Graphik', 'sans-serif', 'ui-sans-serif', 'system-ui'],
+        serif: ['Merriweather', 'serif'],
+      }
+    },
   },
   plugins: [],
 }
