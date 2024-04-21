@@ -43,7 +43,13 @@ export default function LeftMenu() {
                         setActive(item.key);
                         item.link && navigate(item.link);
                     }}
-                    className={`transition-all bg-transparent hover:bg-gray-100 cursor-pointer rounded-[8px] mx-[4px] my-[4px] ${active === item.key ? 'bg-[#e6f4ff] text-[#1677ff]' : ""} `}>
+                    style={
+                        active === item.key ? {
+                            backgroundColor: "#e6f4ff",
+                            color: "#1677ff"
+                        } : {}
+                    }
+                    className={`transition-all bg-transparent  cursor-pointer rounded-[8px] mx-[4px] my-[4px] ${active === item.key ? '' : "hover:bg-gray-100"} `}>
                     <Tooltip placement="right" title={item.label} >
                         <span className=' h-[40px] flex w-full items-center justify-center'>
                             {item.icon}
