@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "砍柴",
+    "productName": "kanChai",
     "version": "0.0.0"
   },
   "tauri": {
@@ -30,7 +30,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.nianyi.dev",
+      "identifier": "com.kanchai.dev",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
