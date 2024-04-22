@@ -1,7 +1,6 @@
-# Tauri + React + Typescript
+# kan-chai
+### 取自「磨刀不误砍柴功」，意指该工具有提效降本之意
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+<img width="800" alt="image" src="https://github.com/lidakai/kan-chai/assets/23355645/219b5886-c9ff-46f4-942b-4cf663cad704">
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
