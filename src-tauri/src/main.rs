@@ -1,15 +1,46 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![cfg_attr(
+    all(not(debug_assertions), target_os = "windows"),
+    windows_subsystem = "windows"
+)]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
+use tauri::{Manager, State};
+use tauri_plugin_sql::{migrations::Migrations, Action, DbExt, Query, SqliteConnector, TauriSql};
 
 fn main() {
+    let context = tauri::generate_context!();
+
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .plugin(
+            TauriSql::default()
+                .add_connector(SqliteConnector::default().with_migrations(Migrations::Embedded))
+                .on_query_hook(|query| {
+                    println!("Query: {}", query.query_string);
+                    Ok(())
+                }),
+        )
+        .invoke_handler(|_webview, arg| {
+            use Action::*;
+
+            match arg {
+                OpenConnection {
+                    connection_name, ..
+                } => {
+                    let db_path = std::path::PathBuf::from("tauri.db");
+                    match SqliteConnector::new(&db_path) {
+                        Ok(db) => {
+                            let mut tx = TauriSql::get(&_webview.app_handle().state::<State>())
+                                .unwrap()
+                                .begin();
+                            tx.attach(&connection_name, db);
+                            Ok(())
+                        }
+                        Err(e) => Err(e.to_string()),
+                    }
+                }
+
+                _ => Ok(()),
+            }
+        })
+        .run(context)
+        .expect("failed to run app");
 }
