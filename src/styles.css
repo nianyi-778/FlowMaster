@@ -25,3 +25,11 @@
   -ms-user-select: none; /* IE10+ */
   user-select: none; /* 标准语法 */
 }
+
+.icon {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}

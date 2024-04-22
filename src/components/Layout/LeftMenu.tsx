@@ -1,61 +1,38 @@
-import {
-    ContainerOutlined,
-    DesktopOutlined,
-    HomeOutlined,
-    PieChartOutlined,
-} from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "antd";
 import { useState } from 'react';
+import { homeConfig, defaultHome } from '@/constants/config';
+import Icon from '@/components/Icon';
+
+
 export default function LeftMenu() {
     const navigate = useNavigate();
-    const [active, setActive] = useState('1');
-    const items = [
-        {
-            label: "Option 1",
-            link: "/",
-            key: '1',
-            icon: <PieChartOutlined />
-        },
-        {
-            label: "Option 2",
-            key: '2',
-            link: "/",
-            icon: <DesktopOutlined />
-        }, {
-            label: "Option 3",
-            key: '3',
-            link: "/",
-            icon: <ContainerOutlined />
-        }, {
-            label: "返回首页",
-            key: '4',
-            icon: <HomeOutlined />,
-            link: "/"
-        }
-    ];
+    const [active, setActive] = useState(1);
 
     return <div>
         <ul>
             {
-                items.map(item => <li key={item.key}
-                    onClick={() => {
-                        setActive(item.key);
-                        item.link && navigate(item.link);
-                    }}
-                    style={
-                        active === item.key ? {
-                            backgroundColor: "#e6f4ff",
-                            color: "#1677ff"
-                        } : {}
-                    }
-                    className={`transition-all bg-transparent  cursor-pointer rounded-[8px] mx-[4px] my-[4px] ${active === item.key ? '' : "hover:bg-gray-100"} `}>
-                    <Tooltip placement="right" title={item.label} >
-                        <span className=' h-[40px] flex w-full items-center justify-center'>
-                            {item.icon}
-                        </span>
-                    </Tooltip>
-                </li>)
+                homeConfig.concat(defaultHome).map(item => {
+                    const isActive = active === item.id;
+                    return <li key={item.id}
+                        onClick={() => {
+                            setActive(item.id);
+                            item.link && navigate(item.link);
+                        }}
+                        style={
+                            isActive ? {
+                                backgroundColor: "#e6f4ff",
+                                color: "#1677ff"
+                            } : {}
+                        }
+                        className={`transition-all bg-transparent  cursor-pointer rounded-[8px] mx-[4px] my-[4px] ${isActive ? '' : "hover:bg-gray-100"} `}>
+                        <Tooltip placement="right" title={item.title} >
+                            <span className=' h-[40px] flex w-full items-center justify-center'>
+                                <Icon name={item.icon}></Icon>
+                            </span>
+                        </Tooltip>
+                    </li>
+                })
             }
         </ul>
     </div>
