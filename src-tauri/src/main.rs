@@ -2,45 +2,65 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
+mod todo;
+use std::sync::Mutex;
+use todo::{Todo, TodoApp};
 
-use tauri::{Manager, State};
-use tauri_plugin_sql::{migrations::Migrations, Action, DbExt, Query, SqliteConnector, TauriSql};
+struct AppState {
+    app: Mutex<TodoApp>,
+}
 
 fn main() {
-    let context = tauri::generate_context!();
-
+    let app = TodoApp::new().unwrap();
     tauri::Builder::default()
-        .plugin(
-            TauriSql::default()
-                .add_connector(SqliteConnector::default().with_migrations(Migrations::Embedded))
-                .on_query_hook(|query| {
-                    println!("Query: {}", query.query_string);
-                    Ok(())
-                }),
-        )
-        .invoke_handler(|_webview, arg| {
-            use Action::*;
-
-            match arg {
-                OpenConnection {
-                    connection_name, ..
-                } => {
-                    let db_path = std::path::PathBuf::from("tauri.db");
-                    match SqliteConnector::new(&db_path) {
-                        Ok(db) => {
-                            let mut tx = TauriSql::get(&_webview.app_handle().state::<State>())
-                                .unwrap()
-                                .begin();
-                            tx.attach(&connection_name, db);
-                            Ok(())
-                        }
-                        Err(e) => Err(e.to_string()),
-                    }
-                }
-
-                _ => Ok(()),
-            }
+        .manage(AppState {
+            app: Mutex::from(app),
         })
-        .run(context)
-        .expect("failed to run app");
+        .invoke_handler(tauri::generate_handler![
+            get_todos,
+            new_todo,
+            toggle_done,
+            update_todo
+        ])
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
+}
+
+#[tauri::command]
+fn get_todos(state: tauri::State<AppState>) -> Vec<Todo> {
+    let app = state.app.lock().unwrap();
+    let todos = app.get_todos().unwrap();
+    todos
+}
+
+#[tauri::command]
+fn new_todo(state: tauri::State<AppState>, todo: Todo) -> bool {
+    let app = state.app.lock().unwrap();
+    let result = app.new_todo(todo);
+    result
+}
+
+#[tauri::command]
+fn update_todo(state: tauri::State<AppState>, todo: Todo) -> bool {
+    let app = state.app.lock().unwrap();
+    let result = app.update_todo(todo);
+    result
+}
+
+#[tauri::command]
+fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
+    let app = state.app.lock().unwrap();
+    let Todo {
+        id,
+        label,
+        done,
+        is_delete,
+    } = app.get_todo(id).unwrap();
+    let result = app.update_todo(Todo {
+        id,
+        label,
+        done: !done,
+        is_delete,
+    });
+    result
 }
