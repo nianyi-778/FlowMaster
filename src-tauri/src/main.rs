@@ -55,12 +55,14 @@ fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
         label,
         done,
         is_delete,
+        todo_type,
     } = app.get_todo(id).unwrap();
     let result = app.update_todo(Todo {
         id,
         label,
         done: !done,
         is_delete,
+        todo_type,
     });
     result
 }

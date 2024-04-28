@@ -2,11 +2,13 @@ use rusqlite::{Connection, Result};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
+
 pub struct Todo {
     pub id: String,
     pub label: String,
     pub done: bool,
     pub is_delete: bool,
+    pub todo_type: u8,
 }
 
 pub struct TodoApp {
@@ -22,7 +24,8 @@ impl TodoApp {
                 id          varchar(64)     PRIMARY KEY,
                 label       text            NOT NULL,
                 done        numeric         DEFAULT 0,
-                is_delete   numeric         DEFAULT 0
+                is_delete   numeric         DEFAULT 0,
+                todo_type   numeric         CHECK(todo_type IN (1, 2, 3, 4, 5, 6))
             )",
             [],
         )?;
@@ -37,6 +40,7 @@ impl TodoApp {
                 label: row.get(1)?,
                 done: row.get(2)?,
                 is_delete: row.get(3)?,
+                todo_type: row.get(4)?,
             })
         })?;
         let todo = rows.next().unwrap()?;
@@ -54,6 +58,7 @@ impl TodoApp {
                 label: row.get(1)?,
                 done,
                 is_delete,
+                todo_type: row.get(4)?,
             })
         })?;
         let mut todos: Vec<Todo> = Vec::new();
@@ -66,11 +71,16 @@ impl TodoApp {
     }
 
     pub fn new_todo(&self, todo: Todo) -> bool {
-        let Todo { id, label, .. } = todo;
-        match self
-            .conn
-            .execute("INSERT INTO Todo (id, label) VALUES (?, ?)", [id, label])
-        {
+        let Todo {
+            id,
+            label,
+            todo_type,
+            ..
+        } = todo;
+        match self.conn.execute(
+            "INSERT INTO Todo (id, label,todo_type) VALUES (?, ?, ?)",
+            [id, label, todo_type.to_string()],
+        ) {
             Ok(insert) => {
                 println!("{} row inserted", insert);
                 true
@@ -88,13 +98,20 @@ impl TodoApp {
             done,
             is_delete,
             id,
+            todo_type,
         } = todo;
         let done = if done == true { 1 } else { 0 };
         let is_delete = if is_delete == true { 1 } else { 0 };
         match self.conn.execute(
             "UPDATE Todo
-        SET label = ?1, done = ?2, is_delete = ?3 WHERE id = ?4",
-            [label, done.to_string(), is_delete.to_string(), id],
+        SET label = ?1, done = ?2, is_delete = ?3 todo_type = ?4, WHERE id = ?5",
+            [
+                label,
+                done.to_string(),
+                is_delete.to_string(),
+                todo_type.to_string(),
+                id,
+            ],
         ) {
             Ok(update) => {
                 println!("row {} has been update", update);

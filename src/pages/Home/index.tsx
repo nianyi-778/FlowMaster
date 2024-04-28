@@ -16,9 +16,9 @@ export default function Main() {
 
     useEffect(() => {
         // const addTodo = async (label: string, id: string) => {
-        //     invoke('new_todo', { todo: { id, label, done: false, is_delete: false } })
+        //     invoke('new_todo', { todo: { id, label, done: false, is_delete: false, todo_type: 3 } })
         // }
-        // addTodo('likai', Date.now() + '');
+        // addTodo('likai2', Date.now() + '');
 
         invoke<Todo[]>('get_todos').then((res) => {
             console.log(res, 'res');
