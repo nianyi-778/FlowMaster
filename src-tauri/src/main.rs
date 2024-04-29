@@ -3,6 +3,7 @@
     windows_subsystem = "windows"
 )]
 mod todo;
+mod utils;
 use std::sync::Mutex;
 use todo::{Todo, TodoApp};
 

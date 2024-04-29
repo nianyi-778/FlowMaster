@@ -8,13 +8,17 @@ import { invoke } from '@tauri-apps/api/tauri'
 import { Todo } from '@/types/todo'
 const { Title, Text } = Typography;
 
-
+import { appDataDir } from '@tauri-apps/api/path';
 
 export default function Main() {
 
     useMoveHighlight();
 
     useEffect(() => {
+        (async () => {
+            const appDataDirPath = await appDataDir();
+            console.log(appDataDirPath);
+        })()
         // const addTodo = async (label: string, id: string) => {
         //     invoke('new_todo', { todo: { id, label, done: false, is_delete: false, todo_type: 3 } })
         // }

@@ -1,6 +1,8 @@
 use rusqlite::{Connection, Result};
 use serde::{Deserialize, Serialize};
 
+use crate::utils::add;
+
 #[derive(Serialize, Deserialize, Debug)]
 
 pub struct Todo {
@@ -17,6 +19,7 @@ pub struct TodoApp {
 
 impl TodoApp {
     pub fn new() -> Result<TodoApp> {
+        println!("add {}", add(1, 3));
         let db_path = "db.sqlite";
         let conn = Connection::open(db_path)?;
         conn.execute(
@@ -25,7 +28,7 @@ impl TodoApp {
                 label       text            NOT NULL,
                 done        numeric         DEFAULT 0,
                 is_delete   numeric         DEFAULT 0,
-                todo_type   numeric         CHECK(todo_type IN (1, 2, 3, 4, 5, 6))
+                todo_type   numeric         NOT NULL,CHECK(todo_type IN (1, 2, 3, 4, 5, 6))
             )",
             [],
         )?;
