@@ -1,37 +1,34 @@
-import { Button, Form, Input, DatePicker } from 'antd';
+import { Button, Form, Input, DatePicker, Tag } from 'antd';
 import { RangePickerProps } from 'antd/es/date-picker';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { useCallback } from 'react';
 dayjs.extend(customParseFormat);
 
-const range = (start: number, end: number) => {
-    const result = [];
-    for (let i = start; i < end; i++) {
-        result.push(i);
-    }
-    return result;
-};
 
 export default function QuadrantsItem() {
     const [form] = Form.useForm();
 
     const disabledDate: RangePickerProps['disabledDate'] = (current) => {
-        // Can not select days before today and today
         return current && current < dayjs().endOf('day');
     };
 
-    const disabledDateTime = () => ({
-        disabledHours: () => range(0, 24).splice(4, 20),
-        disabledMinutes: () => range(30, 60),
-        disabledSeconds: () => [55, 56],
-    });
+    const onFinish = useCallback((values: {
+        title: string;
+        describe?: string;
+        time?: string;
+    }) => {
+        console.log(values);
+    }, [])
+
 
     // bg-white h-full rounded-[20px] p-[10px]
-    return <div className="  h-full ">
-        <p className=' text-[12px] text-gray-400'>
+    return <div className="  h-full overflow-hidden ">
+        <p className=' text-[12px] text-gray-400 '>
             时间，标题，描述（支持 文字/图片/视频/）、标签       </p>
         <Form
             layout={"vertical"}
+            onFinish={onFinish}
             form={form}
         >
             <Form.Item label="标题" name={'title'} rules={[{ required: true }]} >
@@ -40,18 +37,18 @@ export default function QuadrantsItem() {
             <Form.Item label="描述" name={"describe"}>
                 <Input.TextArea placeholder="请输入描述" />
             </Form.Item>
-            <Form.Item label="截止时间" name={"time"}>
-                <DatePicker
+            <Form.Item label="截止时间" name={"endTime"}>
+                <Input placeholder="请输入截止时间（YYYY-MM-DD HH:mm:ss）" />
+                {/* <DatePicker
                     placement="topLeft"
                     format="YYYY-MM-DD HH:mm:ss"
                     disabledDate={disabledDate}
-                    disabledTime={disabledDateTime}
                     showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
-                />
+                /> */}
             </Form.Item>
 
-            <Form.Item >
-                <Button type="primary">提交</Button>
+            <Form.Item  >
+                <Button type="primary" htmlType="submit">提交</Button>
             </Form.Item>
         </Form>
     </div>

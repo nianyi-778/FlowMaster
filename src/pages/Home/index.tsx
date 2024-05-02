@@ -2,32 +2,14 @@ import './index.less';
 import useMoveHighlight from '@/hooks/useMoveHighlight';
 import { homeConfig } from '@/constants/config';
 import { Link } from 'react-router-dom';
-import { Typography } from "antd";
-import { useEffect } from 'react';
-import { invoke } from '@tauri-apps/api/tauri'
-import { Todo } from '@/types/todo'
+import { Typography, FloatButton } from "antd";
+import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons';
 const { Title, Text } = Typography;
-
-import { appDataDir } from '@tauri-apps/api/path';
 
 export default function Main() {
 
     useMoveHighlight();
 
-    useEffect(() => {
-        (async () => {
-            const appDataDirPath = await appDataDir();
-            console.log(appDataDirPath);
-        })()
-        // const addTodo = async (label: string, id: string) => {
-        //     invoke('new_todo', { todo: { id, label, done: false, is_delete: false, todo_type: 3 } })
-        // }
-        // addTodo('likai2', Date.now() + '');
-
-        invoke<Todo[]>('get_todos').then((res) => {
-            console.log(res, 'res');
-        })
-    }, [])
 
 
     return <div className=" w-full h-full bg" >
@@ -55,6 +37,13 @@ export default function Main() {
             }
 
         </div>
-
+        <FloatButton.Group
+            trigger="click"
+            style={{ right: 24 }}
+            icon={<CustomerServiceOutlined />}
+        >
+            <FloatButton />
+            <FloatButton icon={<CommentOutlined />} />
+        </FloatButton.Group>
     </div>
 }

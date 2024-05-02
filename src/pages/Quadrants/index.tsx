@@ -6,7 +6,9 @@ import styles from './index.module.less';
 import QuadrantsItem from "./components/QuadrantsItem";
 import LeftMenu from "@/components/Layout/LeftMenu";
 import { PlusCircleTwoTone } from "@ant-design/icons";
-
+import { useEffect } from 'react';
+import { invoke } from '@tauri-apps/api/tauri'
+import { Todo } from '@/types/todo'
 
 
 export default function Quadrants() {
@@ -20,6 +22,20 @@ export default function Quadrants() {
 
     const onAdd = useCallback(() => {
     }, [])
+
+    useEffect(() => {
+        // const addTodo = async (label: string, id: string) => {
+        //     invoke('new_todo', { todo: { id, label, done: false, is_delete: false, todo_type: 3 } })
+        // }
+        // addTodo('likai2', Date.now() + '');
+        console.log(type);
+        if (type) {
+            invoke<Todo[]>('get_todos', { todoType: +type }).then((res) => {
+                console.log(res, 'res');
+            })
+        }
+
+    }, [type])
 
     console.log(item);
     return <div className=" bg-[#f2f5fe] w-full h-full flex">

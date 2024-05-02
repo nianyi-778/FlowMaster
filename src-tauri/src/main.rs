@@ -4,6 +4,7 @@
 )]
 mod todo;
 mod utils;
+use chrono::Utc;
 use std::sync::Mutex;
 use todo::{Todo, TodoApp};
 
@@ -28,9 +29,9 @@ fn main() {
 }
 
 #[tauri::command]
-fn get_todos(state: tauri::State<AppState>) -> Vec<Todo> {
+fn get_todos(state: tauri::State<AppState>, todo_type: u8) -> Vec<Todo> {
     let app = state.app.lock().unwrap();
-    let todos = app.get_todos().unwrap();
+    let todos = app.get_todos(todo_type).unwrap();
     todos
 }
 
@@ -53,17 +54,25 @@ fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
     let app = state.app.lock().unwrap();
     let Todo {
         id,
-        label,
+        describe,
         done,
         is_delete,
         todo_type,
+        ..
     } = app.get_todo(id).unwrap();
+
+    let current_timestamp = Utc::now().timestamp();
+    println!("Current timestamp: {}", current_timestamp);
+
     let result = app.update_todo(Todo {
         id,
-        label,
+        describe,
         done: !done,
         is_delete,
         todo_type,
+        updated_at: current_timestamp,
+        end_time: 0,
+        created_at: 0,
     });
     result
 }
