@@ -1,6 +1,15 @@
 export interface Todo {
   id: string;
-  label: string;
+  title: string;
+  describe?: string;
   done: boolean;
-  is_delete: boolean;
+  end_time?: number;
+  quadrant: Quadrant;
+}
+
+export enum Quadrant {
+  First = 1,
+  Second,
+  Third,
+  NumberFour,
 }

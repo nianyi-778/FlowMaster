@@ -10,8 +10,6 @@ export default function Main() {
 
     useMoveHighlight();
 
-
-
     return <div className=" w-full h-full bg" >
         <div className='colBox'>
             {

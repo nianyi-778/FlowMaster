@@ -7,6 +7,7 @@ use crate::utils::add;
 
 pub struct Todo {
     pub id: i8,
+    pub title: String,
     pub describe: String,
     pub done: bool,
     pub is_delete: bool,
@@ -14,6 +15,7 @@ pub struct Todo {
     pub created_at: i64,
     pub updated_at: i64,
     pub todo_type: u8,
+    pub quadrant: u8,
 }
 
 pub struct TodoApp {
@@ -28,10 +30,12 @@ impl TodoApp {
         conn.execute(
             "CREATE TABLE IF NOT EXISTS todo (
                 id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                title       TEXT NOT NULL,
                 describe    TEXT,
                 done        NUMERIC DEFAULT 0 NOT NULL,
                 is_delete   NUMERIC DEFAULT 0,
                 type        INTEGER CHECK(type IN (1, 2, 3, 4, 5, 6)) NOT NULL,
+                quadrant    INTEGER CHECK(type IN (1, 2, 3, 4)) NOT NULL,
                 created_at  INTEGER,
                 updated_at  INTEGER,
                 end_time    INTEGER
@@ -46,13 +50,15 @@ impl TodoApp {
         let mut rows = stmt.query_map(&[&id], |row| {
             Ok(Todo {
                 id: row.get(0)?,
-                describe: row.get(1)?,
-                done: row.get(2)?,
-                is_delete: row.get(3)?,
-                todo_type: row.get(4)?,
-                end_time: row.get(5)?,
-                created_at: row.get(6)?,
-                updated_at: row.get(7)?,
+                title: row.get(1)?,
+                describe: row.get(2)?,
+                done: row.get(3)?,
+                is_delete: row.get(4)?,
+                todo_type: row.get(5)?,
+                quadrant: row.get(6)?,
+                end_time: row.get(7)?,
+                created_at: row.get(8)?,
+                updated_at: row.get(9)?,
             })
         })?;
         let todo = rows.next().unwrap()?;
@@ -65,18 +71,20 @@ impl TodoApp {
             .prepare("SELECT * FROM todo WHERE type = ?")
             .unwrap();
         let todos_iter = stmt.query_map(&[&todo_type], |row| {
-            let done = row.get::<usize, i32>(2).unwrap() == 1;
-            let is_delete = row.get::<usize, i32>(3).unwrap() == 1;
+            let done = row.get::<usize, i32>(4).unwrap() == 1;
+            let is_delete = row.get::<usize, i32>(4).unwrap() == 1;
 
             Ok(Todo {
                 id: row.get(0)?,
-                describe: row.get(1)?,
+                title: row.get(1)?,
+                describe: row.get(2)?,
                 done,
                 is_delete,
-                todo_type: row.get(4)?,
-                end_time: row.get(5)?,
-                created_at: row.get(6)?,
-                updated_at: row.get(7)?,
+                todo_type: row.get(5)?,
+                quadrant: row.get(6)?,
+                end_time: row.get(7)?,
+                created_at: row.get(8)?,
+                updated_at: row.get(9)?,
             })
         })?;
         let mut todos: Vec<Todo> = Vec::new();

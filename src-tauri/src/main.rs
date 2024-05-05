@@ -54,6 +54,7 @@ fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
     let app = state.app.lock().unwrap();
     let Todo {
         id,
+        title,
         describe,
         done,
         is_delete,
@@ -66,10 +67,12 @@ fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
 
     let result = app.update_todo(Todo {
         id,
+        title,
         describe,
         done: !done,
         is_delete,
         todo_type,
+        quadrant: 1,
         updated_at: current_timestamp,
         end_time: 0,
         created_at: 0,
