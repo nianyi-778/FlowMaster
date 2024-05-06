@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "@/pages/Home";
-import Quadrants from "@/pages/Quadrants";
 import Layout from "@/components/Layout";
 
 export const router = createBrowserRouter([
@@ -12,10 +11,6 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />
       },
-      {
-        path: 'quadrants/:type',
-        element: <Quadrants />
-      }
     ]
   },
 ]);

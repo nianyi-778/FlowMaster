@@ -5,6 +5,6 @@ export default function Icon({ name, classNames = '' }: { name: string; classNam
     }
 
     return <svg className={`icon ${classNames}`} aria-hidden="true">
-        <use xlinkHref={`#${name}`}></use>
+        <use xlinkHref={`#${name}`} ></use>
     </svg>
 }
