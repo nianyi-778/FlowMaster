@@ -7,6 +7,7 @@ mod utils;
 use chrono::Utc;
 use std::sync::Mutex;
 use todo::{Todo, TodoApp};
+use utils::set_window_shadow;
 
 struct AppState {
     app: Mutex<TodoApp>,
@@ -17,6 +18,10 @@ fn main() {
     tauri::Builder::default()
         .manage(AppState {
             app: Mutex::from(app),
+        })
+        .setup(|app| {
+            set_window_shadow(app);
+            Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_todos,

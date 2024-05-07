@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom"
 import { homeConfig } from '@/constants/config';
 import { useCallback, useMemo, useState } from "react";
 import styles from './index.module.less';
-import LeftMenu from "@/components/Layout/LeftMenu";
 import { PlusCircleTwoTone } from "@ant-design/icons";
 import { useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/tauri'
@@ -72,8 +71,7 @@ export default function Quadrants() {
 
 
     console.log(a, b, c, d, item);
-    return <div className=" bg-[#f2f5fe] w-full h-full flex overflow-y-auto">
-        <LeftMenu />
+    return <div className=" bg-[#f8faff] w-full h-full flex overflow-y-auto">
         <div className=" flex justify-between h-full p-[20px] flex-1">
             <div className={`${styles.container} grid   gap-4`}>
                 <div className={`${styles.item} bg-white relative  overflow-hidden  group  px-[10px] pt-[10px]  border-[1px] border-transparent aspect-w-1 aspect-h-1 hover:border-red-300 hover:bg-[rgba(255,255,255,.5)]`}>
@@ -93,49 +91,58 @@ export default function Quadrants() {
                         </div>
                     </div>
                 </div>
-                <div className={`${styles.item} bg-white flex group flex-col p-[10px] border-[1px] border-transparent aspect-w-1 aspect-h-1 hover:border-yellow-300 hover:bg-[rgba(255,255,255,.5)]`}>
-                    <h2 className=" text-yellow-500 font-bold no-select flex justify-between">
-                        <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['II'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white"> 重要不紧急</span>
-                        <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
-                    </h2>
-                    <div className="flex-1 overflow-y-auto">
-                        {
-                            b.map(d => (
-                                <p className=" truncate text-[12px]" key={d.id}>
-                                    <Checkbox >{d.title}</Checkbox>
-                                </p>
-                            ))
-                        }
+                <div className={`${styles.item} bg-white relative flex group flex-col p-[10px] border-[1px] border-transparent aspect-w-1 aspect-h-1 hover:border-yellow-300 hover:bg-[rgba(255,255,255,.5)]`}>
+                    <div className=" overflow-hidden flex  flex-col ">
+                        <h2 className=" text-yellow-500 font-bold no-select flex justify-between">
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['II'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white"> 重要不紧急</span>
+                            <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                        </h2>
+                        <div className="flex-1 overflow-y-auto pb-[4px]">
+                            {
+                                b.map(d => (
+                                    <p className=" truncate text-[12px]" key={d.id}>
+                                        <Checkbox >{d.title}</Checkbox>
+                                    </p>
+                                ))
+                            }
+                        </div>
                     </div>
+
+
                 </div>
-                <div className={`${styles.item} bg-white flex group flex-col p-[10px] aspect-w-1 border-[1px] border-transparent aspect-h-1 hover:border-blue-300 hover:bg-[rgba(255,255,255,.5)]`}>
-                    <h2 className=" text-blue-500 font-bold no-select flex justify-between">
-                        <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['III'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white"> 不重要紧急</span>
-                        <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
-                    </h2>
-                    <div className="flex-1 overflow-y-auto">
-                        {
-                            c.map(d => (
-                                <p className=" truncate text-[12px]" key={d.id}>
-                                    <Checkbox >{d.title}</Checkbox>
-                                </p>
-                            ))
-                        }
+                <div className={`${styles.item} bg-white relative flex group flex-col p-[10px] aspect-w-1 border-[1px] border-transparent aspect-h-1 hover:border-blue-300 hover:bg-[rgba(255,255,255,.5)]`}>
+                    <div className=" overflow-hidden flex  flex-col ">
+                        <h2 className=" text-blue-500 font-bold no-select flex justify-between">
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['III'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white"> 不重要紧急</span>
+                            <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                        </h2>
+                        <div className="flex-1 overflow-y-auto pb-[4px]">
+                            {
+                                c.map(d => (
+                                    <p className=" truncate text-[12px]" key={d.id}>
+                                        <Checkbox >{d.title}</Checkbox>
+                                    </p>
+                                ))
+                            }
+                        </div>
                     </div>
+
                 </div>
-                <div className={`${styles.item} p-[10px] bg-white flex group flex-col aspect-w-1 border-[1px] border-transparent aspect-h-1 hover:border-green-300 hover:bg-[rgba(255,255,255,.5)]`}>
-                    <h2 className=" text-green-500 font-bold no-select flex justify-between">
-                        <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['IV'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white"> 不重要不紧急</span>
-                        <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
-                    </h2>
-                    <div className="flex-1 overflow-y-auto">
-                        {
-                            d.map(d => (
-                                <p className=" truncate text-[12px]" key={d.id}>
-                                    <Checkbox >{d.title}</Checkbox>
-                                </p>
-                            ))
-                        }
+                <div className={`${styles.item} p-[10px] relative bg-white flex group flex-col aspect-w-1 border-[1px] border-transparent aspect-h-1 hover:border-green-300 hover:bg-[rgba(255,255,255,.5)]`}>
+                    <div className=" overflow-hidden flex  flex-col ">
+                        <h2 className=" text-green-500 font-bold no-select flex justify-between">
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['IV'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white"> 不重要不紧急</span>
+                            <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                        </h2>
+                        <div className="flex-1 overflow-y-auto pb-[4px]">
+                            {
+                                d.map(d => (
+                                    <p className=" truncate text-[12px]" key={d.id}>
+                                        <Checkbox >{d.title}</Checkbox>
+                                    </p>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

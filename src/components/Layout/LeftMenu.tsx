@@ -9,7 +9,7 @@ export default function LeftMenu() {
     const navigate = useNavigate();
     const [active, setActive] = useState(1);
 
-    return <ul className=" bg-white  pt-[20px] w-[62px]">
+    return <ul className=" bg-[#f1f4ff]  pt-[20px] w-[62px]" data-tauri-drag-region>
         {
             homeConfig.map(item => {
                 const isActive = active === item.id;
@@ -20,11 +20,10 @@ export default function LeftMenu() {
                     }}
                     style={
                         isActive ? {
-                            backgroundColor: "#e6f4ff",
                             color: "#1677ff"
                         } : {}
                     }
-                    className={`transition-all bg-transparent  cursor-pointer rounded-[8px] mx-[4px] my-[4px] ${isActive ? '' : "hover:bg-gray-100"} `}>
+                    className={`transition-all bg-transparent  cursor-pointer rounded-[8px] mx-[4px] my-[4px] `}>
                     <Tooltip placement="right" title={item.title} >
                         <span className=' h-[40px] flex w-full items-center justify-center'>
                             <Icon name={item.icon}></Icon>

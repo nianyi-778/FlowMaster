@@ -19,9 +19,14 @@
     },
     "windows": [
       {
+        "label": "customization",
+        "decorations": false,
+        "transparent": true,
         "title": "磨刀不误砍柴工",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "minWidth": 800,
+        "minHeight": 600
       }
     ],
     "security": {
