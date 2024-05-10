@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/tauri'
 import { Quadrant, Todo } from '@/types/todo'
 import { Checkbox } from 'antd';
+import { WebviewWindow } from "@tauri-apps/api/window";
 
 
 export default function Quadrants() {
@@ -20,6 +21,20 @@ export default function Quadrants() {
     }, [type])
 
     const onAdd = useCallback(() => {
+        const webview = new WebviewWindow('AddItem', {
+            url: '/AddItem',
+            "decorations": false,
+            "width": 400,
+            "height": 300,
+        })
+        // since the webview window is created asynchronously,
+        // Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
+        webview.once('tauri://created', function () {
+            // webview window successfully created
+        })
+        webview.once('tauri://error', function (e) {
+            // an error occurred during webview window creation
+        })
     }, [])
 
     useEffect(() => {
