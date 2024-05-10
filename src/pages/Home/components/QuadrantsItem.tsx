@@ -1,5 +1,4 @@
-import { Button, Form, Input, DatePicker, Tag } from 'antd';
-import { RangePickerProps } from 'antd/es/date-picker';
+import { Button, Form, Input } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useCallback } from 'react';
@@ -8,10 +7,6 @@ dayjs.extend(customParseFormat);
 
 export default function QuadrantsItem() {
     const [form] = Form.useForm();
-
-    const disabledDate: RangePickerProps['disabledDate'] = (current) => {
-        return current && current < dayjs().endOf('day');
-    };
 
     const onFinish = useCallback((values: {
         title: string;
@@ -39,12 +34,6 @@ export default function QuadrantsItem() {
             </Form.Item>
             <Form.Item label="截止时间" name={"endTime"}>
                 <Input placeholder="请输入截止时间（YYYY-MM-DD HH:mm:ss）" />
-                {/* <DatePicker
-                    placement="topLeft"
-                    format="YYYY-MM-DD HH:mm:ss"
-                    disabledDate={disabledDate}
-                    showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
-                /> */}
             </Form.Item>
 
             <Form.Item  >

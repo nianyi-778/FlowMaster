@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { homeConfig } from '@/constants/config';
 import { useCallback, useMemo, useState } from "react";
 import styles from './index.module.less';
-import { PlusCircleTwoTone } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/tauri'
 import { Quadrant, Todo } from '@/types/todo'
@@ -72,13 +72,13 @@ export default function Quadrants() {
 
     console.log(a, b, c, d, item);
     return <div className=" bg-[#f8faff] w-full h-full flex overflow-y-auto">
-        <div className=" flex justify-between h-full p-[20px] flex-1">
-            <div className={`${styles.container} grid   gap-4`}>
+        <div className=" flex justify-between h-full p-[14px] flex-1">
+            <div className={`${styles.container} grid   gap-3`}>
                 <div className={`${styles.item} bg-white relative  overflow-hidden  group  px-[10px] pt-[10px]  border-[1px] border-transparent aspect-w-1 aspect-h-1 hover:border-red-300 hover:bg-[rgba(255,255,255,.5)]`}>
                     <div className=" overflow-hidden flex  flex-col ">
                         <h2 className=" text-red-500 font-bold no-select flex justify-between">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#ef4444] before:text-white"> 重要且紧急</span>
-                            <PlusCircleTwoTone onClick={onAdd} className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             {
@@ -95,7 +95,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col ">
                         <h2 className=" text-yellow-500 font-bold no-select flex justify-between">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['II'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white"> 重要不紧急</span>
-                            <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                            <PlusOutlined className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             {
@@ -114,7 +114,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col ">
                         <h2 className=" text-blue-500 font-bold no-select flex justify-between">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['III'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white"> 不重要紧急</span>
-                            <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                            <PlusOutlined className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             {
@@ -132,7 +132,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col ">
                         <h2 className=" text-green-500 font-bold no-select flex justify-between">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['IV'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white"> 不重要不紧急</span>
-                            <PlusCircleTwoTone className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                            <PlusOutlined className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             {
