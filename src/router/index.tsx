@@ -1,20 +1,25 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "@/pages/Home";
 import Layout from "@/components/Layout";
-import AddItem from "@/pages/AddItem";
+import AddTodo from "@/pages/AddTodo";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <Outlet />,
     children: [
       {
-        index: true,
-        element: <Home />
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Home />
+          }
+        ]
       },
       {
-        path: "AddItem",
-        element: <AddItem />
+        path: "AddTodo",
+        element: <AddTodo />
       }
     ]
   },

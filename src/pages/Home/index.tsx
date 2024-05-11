@@ -21,8 +21,9 @@ export default function Quadrants() {
     }, [type])
 
     const onAdd = useCallback(() => {
-        const webview = new WebviewWindow('AddItem', {
-            url: '/AddItem',
+        const windowLabel = 'AddTodoModal';
+        const webview = new WebviewWindow(windowLabel, {
+            url: '/AddTodo',
             "decorations": false,
             "width": 400,
             "height": 300,
@@ -35,6 +36,12 @@ export default function Quadrants() {
         webview.once('tauri://error', function (e) {
             // an error occurred during webview window creation
         })
+        webview.once("tauri://blur", function (e) {
+            if (e.windowLabel === windowLabel) {
+                // 失去焦点，卸载窗口
+                webview.close();
+            }
+        });
     }, [])
 
     useEffect(() => {
