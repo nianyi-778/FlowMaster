@@ -1,28 +1,29 @@
+// use tauri::WindowBuilder;
+// use tauri::WindowUrl;
 use tauri::{Manager, Runtime};
 use window_shadows::set_shadow;
-
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 
-pub fn set_window_shadow<R: Runtime>(app: &tauri::App<R>) {
-    let window = app.get_window("customization").unwrap();
+pub fn set_window_shadow<R: Runtime>(app: &tauri::App<R>, window_name: &str) {
+    let window = app.get_window(window_name).unwrap();
     set_shadow(&window, true).expect("Unsupported platform!");
 }
 
-// struct Config {
-//     window_name: String,
-//     router: String,
-// }
-
 // #[tauri::command]
-// pub fn create_window(handle: tauri::AppHandle, config: Config, callback: impl Fn(Window)) {
-//     let _window = tauri::WindowBuilder::new(
-//         &handle,
-//         config.window_name, /* the unique window label */
-//         tauri::WindowUrl::External(config.router.parse().unwrap()),
-//     )
-//     .build()
-//     .unwrap();
-//     callback(_window)
+// async fn create_window(
+//     handle: tauri::AppHandle,
+//     label: String,
+//     url: String,
+// ) -> Result<tauri::Window, Box<dyn std::error::Error>> {
+//     let window = WindowBuilder::new(&handle, &label, WindowUrl::External(url.parse().unwrap()))
+//         .inner_size(400.0, 300.0)
+//         .decorations(false)
+//         .center()
+//         .build()?;
+
+//     // window.webview_manager().unwrap().load(url).unwrap();
+
+//     Ok(window)
 // }

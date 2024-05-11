@@ -32,6 +32,7 @@ export default function Quadrants() {
         // Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
         webview.once('tauri://created', function () {
             // webview window successfully created
+            invoke("set_window_shadow", { window_name: windowLabel })
         })
         webview.once('tauri://error', function (e) {
             // an error occurred during webview window creation

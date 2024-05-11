@@ -20,14 +20,14 @@ fn main() {
             app: Mutex::from(app),
         })
         .setup(|app| {
-            set_window_shadow(app);
+            set_window_shadow(app, "customization");
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_todos,
             new_todo,
             toggle_done,
-            update_todo
+            update_todo,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
