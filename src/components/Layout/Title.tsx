@@ -48,15 +48,20 @@ export default function Title() {
     }
 
     //  windows
-    return <div data-tauri-drag-region className=" bg-[#f8faff] h-full flex justify-end ">
-        <span onClick={handleMinimize} className="  w-[46px] flex items-center justify-center hover:bg-[#eaecf1]">
-            <MinusOutlined />
-        </span>
-        <span onClick={handleMaximize} className="  w-[46px] flex items-center justify-center hover:bg-[#eaecf1]">
-            <BorderOutlined />
-        </span>
-        <span onClick={handleClose} className="  w-[46px] flex items-center justify-center hover:bg-red-500 hover:text-white">
-            <CloseOutlined />
-        </span>
+    return <div
+        data-tauri-drag-region
+        className=" bg-[#f8faff] h-full flex justify-between before:content=['*']  before:w-[52px] before:inline-block before:bg-[#f2f4fe]"
+    >
+        <div className="flex flex-1 justify-end" data-tauri-drag-region>
+            <span onClick={handleMinimize} className="  w-[46px] flex items-center justify-center hover:bg-[#dadada]">
+                <MinusOutlined className=" text-[12px] opacity-80" />
+            </span>
+            <span onClick={handleMaximize} className="  w-[46px] flex items-center justify-center hover:bg-[#dadada]">
+                <BorderOutlined className=" text-[12px] opacity-80" />
+            </span>
+            <span onClick={handleClose} className="  w-[46px] flex items-center justify-center hover:bg-red-500 hover:text-white">
+                <CloseOutlined className=" text-[14px] opacity-80" />
+            </span>
+        </div>
     </div>
 }
