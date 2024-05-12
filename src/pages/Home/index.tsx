@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { homeConfig } from '@/constants/config';
-import { useCallback, useMemo, useState } from "react";
+import { MouseEventHandler, useCallback, useMemo, useState } from "react";
 import styles from './index.module.less';
 import { PlusOutlined } from "@ant-design/icons";
 import { useEffect } from 'react';
@@ -20,19 +20,25 @@ export default function Quadrants() {
         return null;
     }, [type])
 
-    const onAdd = useCallback(() => {
+    const onAdd = useCallback((event: any) => {
         const windowLabel = 'AddTodoModal';
+        var x = event.clientX;
+        var y = event.clientY;
+        console.log("当前窗口的x坐标：" + x);
+        console.log("当前窗口的y坐标：" + y);
         const webview = new WebviewWindow(windowLabel, {
             url: '/AddTodo',
             "decorations": false,
             "width": 400,
             "height": 300,
+            x: x + 20,
+            y: y + 20,
         })
         // since the webview window is created asynchronously,
         // Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
         webview.once('tauri://created', function () {
             // webview window successfully created
-            invoke("set_window_shadow", { window_name: windowLabel })
+            invoke("set_window_shadow", { webview, window_name: windowLabel })
         })
         webview.once('tauri://error', function (e) {
             // an error occurred during webview window creation
