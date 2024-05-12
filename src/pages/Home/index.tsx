@@ -7,8 +7,7 @@ import { useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { Quadrant, Todo } from '@/types/todo';
 import { Checkbox } from 'antd';
-import { Window } from '@tauri-apps/api/window';
-import { Webview } from '@tauri-apps/api/webview';
+import { WebviewWindow } from '@tauri-apps/api/WebviewWindow';
 
 export default function Quadrants() {
     const { type = 1 } = useParams();
@@ -26,19 +25,15 @@ export default function Quadrants() {
         var y = event.clientY;
         console.log("当前窗口的x坐标：" + x);
         console.log("当前窗口的y坐标：" + y);
-        const appWindow = Window.getCurrent();
-        const webview = new Webview(appWindow, windowLabel, {
+        const webview = new WebviewWindow(windowLabel, {
             url: '/AddTodo',
+            title: "添加",
             "width": 400,
             "height": 300,
-            x: 20,
-            y: 20,
+            decorations: false
         })
-        // since the webview window is created asynchronously,
-        // Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
         webview.once('tauri://created', function () {
             // webview window successfully created
-            invoke("set_window_shadow", { webview, window_name: windowLabel })
         })
         webview.once('tauri://error', function () {
             // an error occurred during webview window creation
@@ -159,7 +154,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col ">
                         <h2 className=" text-green-500 font-bold no-select flex justify-between">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['IV'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white"> 不重要不紧急</span>
-                            <PlusOutlined className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
+                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all  invisible cursor-pointer hover:opacity-80 " />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             {

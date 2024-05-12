@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Window } from '@tauri-apps/api/window';
+import { getCurrent } from '@tauri-apps/api/window';
 import { OsType, type } from '@tauri-apps/plugin-os';
 import { MinusOutlined, CloseOutlined, BorderOutlined } from "@ant-design/icons"
 import Icon from "../Icon";
 
 export default function Title() {
-    const appWindow = Window.getCurrent();
+    const appWindow = getCurrent();
     const [platform, setPlatform] = useState<OsType | null>(null);
     useEffect(() => {
         (async () => {

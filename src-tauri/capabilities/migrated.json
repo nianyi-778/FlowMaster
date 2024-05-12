@@ -1,6 +1,9 @@
 {
   "identifier": "migrated",
   "description": "permissions that were migrated from v1",
+  "windows": [
+    "main"
+  ],
   "permissions": [
     "path:default",
     "event:default",
@@ -10,6 +13,7 @@
     "menu:default",
     "notification:default",
     "tray:default",
+    "webview:default",
     "window:allow-create",
     "window:allow-center",
     "window:allow-request-user-attention",
@@ -42,7 +46,6 @@
     "window:allow-set-cursor-position",
     "window:allow-set-ignore-cursor-events",
     "window:allow-start-dragging",
-    "webview:allow-print",
     "shell:allow-execute",
     "shell:allow-execute",
     "shell:allow-open",
@@ -54,6 +57,9 @@
     "os:allow-arch",
     "os:allow-exe-extension",
     "os:allow-locale",
-    "os:allow-hostname"
+    "os:allow-hostname",
+    "webview:allow-create-webview",
+    "webview:allow-print",
+    "webview:allow-create-webview-window"
   ]
 }
