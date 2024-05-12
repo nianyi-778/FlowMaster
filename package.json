@@ -11,7 +11,16 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.6",
-    "@tauri-apps/api": "^1",
+    "@tauri-apps/api": "^2.0.0-beta",
+    "@tauri-apps/plugin-clipboard-manager": "^2.1.0-beta",
+    "@tauri-apps/plugin-dialog": "^2.0.0-beta",
+    "@tauri-apps/plugin-fs": "^2.0.0-beta",
+    "@tauri-apps/plugin-global-shortcut": "^2.0.0-beta",
+    "@tauri-apps/plugin-http": "^2.0.0-beta",
+    "@tauri-apps/plugin-notification": "^2.0.0-beta",
+    "@tauri-apps/plugin-os": "^2.0.0-beta",
+    "@tauri-apps/plugin-process": "^2.0.0-beta",
+    "@tauri-apps/plugin-shell": "^2.0.0-beta",
     "antd": "^5.16.4",
     "autoprefixer": "^10.4.19",
     "classnames": "^2.5.1",
@@ -25,7 +34,7 @@
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1",
+    "@tauri-apps/cli": "2.0.0-beta.17",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.2.1",

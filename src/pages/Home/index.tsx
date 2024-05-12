@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom"
 import { homeConfig } from '@/constants/config';
-import { MouseEventHandler, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import styles from './index.module.less';
 import { PlusOutlined } from "@ant-design/icons";
 import { useEffect } from 'react';
-import { invoke } from '@tauri-apps/api/tauri'
-import { Quadrant, Todo } from '@/types/todo'
+import { invoke } from '@tauri-apps/api/core';
+import { Quadrant, Todo } from '@/types/todo';
 import { Checkbox } from 'antd';
-import { WebviewWindow } from "@tauri-apps/api/window";
-
+import { Window } from '@tauri-apps/api/window';
+import { Webview } from '@tauri-apps/api/webview';
 
 export default function Quadrants() {
     const { type = 1 } = useParams();
@@ -26,13 +26,13 @@ export default function Quadrants() {
         var y = event.clientY;
         console.log("当前窗口的x坐标：" + x);
         console.log("当前窗口的y坐标：" + y);
-        const webview = new WebviewWindow(windowLabel, {
+        const appWindow = Window.getCurrent();
+        const webview = new Webview(appWindow, windowLabel, {
             url: '/AddTodo',
-            "decorations": false,
             "width": 400,
             "height": 300,
-            x: x + 20,
-            y: y + 20,
+            x: 20,
+            y: 20,
         })
         // since the webview window is created asynchronously,
         // Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
@@ -40,14 +40,12 @@ export default function Quadrants() {
             // webview window successfully created
             invoke("set_window_shadow", { webview, window_name: windowLabel })
         })
-        webview.once('tauri://error', function (e) {
+        webview.once('tauri://error', function () {
             // an error occurred during webview window creation
         })
-        webview.once("tauri://blur", function (e) {
-            if (e.windowLabel === windowLabel) {
-                // 失去焦点，卸载窗口
-                webview.close();
-            }
+        webview.once("tauri://blur", function () {
+            // 失去焦点，卸载窗口
+            webview.close();
         });
     }, [])
 

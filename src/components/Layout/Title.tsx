@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { appWindow } from '@tauri-apps/api/window'
-import { OsType, type } from '@tauri-apps/api/os';
+import { Window } from '@tauri-apps/api/window';
+import { OsType, type } from '@tauri-apps/plugin-os';
 import { MinusOutlined, CloseOutlined, BorderOutlined } from "@ant-design/icons"
 import Icon from "../Icon";
 
 export default function Title() {
+    const appWindow = Window.getCurrent();
     const [platform, setPlatform] = useState<OsType | null>(null);
     useEffect(() => {
         (async () => {
@@ -30,7 +31,7 @@ export default function Title() {
         maximize.current = !maximize.current;
     }, [])
 
-    if (platform === "Darwin") {
+    if (platform === "macos") {
         // macOS
         return <div className="bg-[#f8faff] h-full flex" data-tauri-drag-region>
             <div className="w-[52px] bg-[#f2f4fe] flex justify-around items-center px-[2px] group">
