@@ -21,6 +21,7 @@
   "identifier": "com.modao.dev",
   "plugins": {},
   "app": {
+    "macOSPrivateApi": true,
     "security": {
       "csp": null
     },

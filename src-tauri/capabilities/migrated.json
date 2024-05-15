@@ -2,7 +2,8 @@
   "identifier": "migrated",
   "description": "permissions that were migrated from v1",
   "windows": [
-    "main"
+    "main",
+    "AddTodoModal"
   ],
   "permissions": [
     "path:default",
@@ -24,6 +25,7 @@
     "window:allow-set-title",
     "window:allow-maximize",
     "window:allow-unmaximize",
+    "window:allow-toggle-maximize",
     "window:allow-minimize",
     "window:allow-unminimize",
     "window:allow-show",

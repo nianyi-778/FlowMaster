@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCurrent } from '@tauri-apps/api/window';
 import { OsType, type } from '@tauri-apps/plugin-os';
 import { MinusOutlined, CloseOutlined, BorderOutlined } from "@ant-design/icons"
@@ -13,7 +13,6 @@ export default function Title() {
             setPlatform(platformName);
         })()
     }, []);
-    const maximize = useRef(false);
 
     const handleMinimize = useCallback(() => {
         appWindow.minimize()
@@ -22,13 +21,12 @@ export default function Title() {
     const handleClose = useCallback(() => {
         appWindow.close()
     }, [])
-    const handleMaximize = useCallback(() => {
-        if (maximize.current) {
+    const handleMaximize = useCallback(async () => {
+        if (await appWindow.isMaximized()) {
             appWindow.unmaximize();
         } else {
-            appWindow.toggleMaximize()
+            appWindow.maximize();
         }
-        maximize.current = !maximize.current;
     }, [])
 
     if (platform === "macos") {

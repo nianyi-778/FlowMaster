@@ -21,6 +21,7 @@
     "@tauri-apps/plugin-os": "^2.0.0-beta",
     "@tauri-apps/plugin-process": "^2.0.0-beta",
     "@tauri-apps/plugin-shell": "^2.0.0-beta",
+    "ahooks": "^3.7.11",
     "antd": "^5.16.4",
     "autoprefixer": "^10.4.19",
     "classnames": "^2.5.1",
