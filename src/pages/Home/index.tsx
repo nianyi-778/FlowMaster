@@ -33,9 +33,9 @@ export default function Quadrants() {
             x: x + winX / 2 + 20,
             y: y + winY / 2 - 20,
             "decorations": false,
-            "transparent": true,
             parent: curWin,
             "shadow": true,
+            "focus": true,
             resizable: false,
             contentProtected: true
         })
@@ -107,7 +107,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col ">
                         <h2 className="  font-bold no-select flex justify-between">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#ef4444] before:text-white"> 重要且紧急</span>
-                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer hover:opacity-80 " />
+                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer  inline-block text-[#919191] leading-[22px] w-[22px] h-[22px] hover:bg-[#f2f2f2]" />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             {
