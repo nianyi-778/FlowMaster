@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { homeConfig } from '@/constants/config';
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import styles from './index.module.less';
 import { PlusOutlined } from "@ant-design/icons";
 import { useEffect } from 'react';
@@ -9,6 +9,7 @@ import { Quadrant, Todo } from '@/types/todo';
 import { Checkbox } from 'antd';
 import { WebviewWindow } from '@tauri-apps/api/WebviewWindow';
 import { getCurrent } from '@tauri-apps/api/window';
+import QuadrantsItem from "./components/QuadrantsItem";
 
 export default function Quadrants() {
     const { type = 1 } = useParams();
@@ -32,10 +33,11 @@ export default function Quadrants() {
             "height": 300,
             x: x + winX / 2 + 20,
             y: y + winY / 2 - 20,
-            "decorations": false,
+            decorations: false,
             parent: curWin,
-            "shadow": true,
-            "focus": true,
+            shadow: true,
+            // transparent: true,
+            focus: true,
             resizable: false,
             contentProtected: true
         })
@@ -110,13 +112,7 @@ export default function Quadrants() {
                             <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer  inline-block text-[#919191] leading-[22px] w-[22px] h-[22px] hover:bg-[#f2f2f2]" />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
-                            {
-                                a.map(d => (
-                                    <p className=" truncate text-[12px]" key={d.id}>
-                                        <Checkbox >{d.title}</Checkbox>
-                                    </p>
-                                ))
-                            }
+                            <QuadrantsItem data={a}></QuadrantsItem>
                         </div>
                     </div>
                 </div>
@@ -127,13 +123,7 @@ export default function Quadrants() {
                             <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer hover:opacity-80 " />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
-                            {
-                                b.map(d => (
-                                    <p className=" truncate text-[12px]" key={d.id}>
-                                        <Checkbox >{d.title}</Checkbox>
-                                    </p>
-                                ))
-                            }
+                            <QuadrantsItem data={b}></QuadrantsItem>
                         </div>
                     </div>
 
