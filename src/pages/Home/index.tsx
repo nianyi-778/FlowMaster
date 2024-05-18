@@ -119,9 +119,9 @@ export default function Quadrants() {
             <div className={`${styles.container} grid   gap-3`}>
                 <div className={`${styles.item} bg-white relative  overflow-hidden  group  px-[10px] pt-[10px]  border-[1px] border-transparent aspect-w-1 aspect-h-1  hover:bg-[rgba(255,255,255,.5)]`}>
                     <div className=" overflow-hidden flex  flex-col h-full ">
-                        <h2 className="  font-bold no-select flex justify-between">
+                        <h2 className="  font-bold no-select flex justify-between  h-[24px]">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#ef4444] before:text-white text-[#ef4444]"> 重要且紧急</span>
-                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer  inline-block text-[#919191] leading-[22px] w-[22px] h-[22px] hover:bg-[#f2f2f2]" />
+                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             <QuadrantsItem data={a}></QuadrantsItem>
@@ -129,10 +129,11 @@ export default function Quadrants() {
                     </div>
                 </div>
                 <div className={`${styles.item} bg-white relative flex group flex-col p-[10px] border-[1px] border-transparent aspect-w-1 aspect-h-1  hover:bg-[rgba(255,255,255,.5)]`}>
-                    <div className=" overflow-hidden flex  flex-col ">
-                        <h2 className="  font-bold no-select flex justify-between">
-                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['II'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white text-[#eab308]"> 重要不紧急</span>
-                            <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer hover:opacity-80 " />
+                    {/* eab308  重要不紧急*/}
+                    <div className=" overflow-hidden flex  flex-col h-full ">
+                        <h2 className="  font-bold no-select flex justify-between  h-[24px]">
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white text-[#eab308]"> 重要不紧急</span>
+                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
                             <QuadrantsItem data={b}></QuadrantsItem>
@@ -142,37 +143,27 @@ export default function Quadrants() {
 
                 </div>
                 <div className={`${styles.item} bg-white relative flex group flex-col p-[10px] aspect-w-1 border-[1px] border-transparent aspect-h-1  hover:bg-[rgba(255,255,255,.5)]`}>
-                    <div className=" overflow-hidden flex  flex-col ">
-                        <h2 className="  font-bold no-select flex justify-between">
-                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['III'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white text-[#3b82f6]"> 不重要但紧急</span>
-                            <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer hover:opacity-80 " />
+                    {/* 3b82f6 */}
+                    <div className=" overflow-hidden flex  flex-col h-full ">
+                        <h2 className="  font-bold no-select flex justify-between  h-[24px]">
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white text-[#3b82f6]"> 不重要但紧急</span>
+                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
-                            {
-                                c.map(d => (
-                                    <p className=" truncate text-[12px]" key={d.id}>
-                                        <Checkbox >{d.title}</Checkbox>
-                                    </p>
-                                ))
-                            }
+                            <QuadrantsItem data={c}></QuadrantsItem>
                         </div>
                     </div>
 
                 </div>
                 <div className={`${styles.item} p-[10px] relative bg-white flex group flex-col aspect-w-1 border-[1px] border-transparent aspect-h-1  hover:bg-[rgba(255,255,255,.5)]`}>
-                    <div className=" overflow-hidden flex  flex-col ">
-                        <h2 className="  font-bold no-select flex justify-between">
-                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['IV'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white text-[#22c55e]"> 不重要不紧急</span>
-                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer hover:opacity-80 " />
+                    {/* 22c55e  不重要不紧急*/}
+                    <div className=" overflow-hidden flex  flex-col h-full ">
+                        <h2 className="  font-bold no-select flex justify-between  h-[24px]">
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white text-[#22c55e]"> 不重要不紧急</span>
+                            <PlusOutlined onClick={onAdd} className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                         </h2>
                         <div className="flex-1 overflow-y-auto pb-[4px]">
-                            {
-                                d.map(d => (
-                                    <p className=" truncate text-[12px]" key={d.id}>
-                                        <Checkbox >{d.title}</Checkbox>
-                                    </p>
-                                ))
-                            }
+                            <QuadrantsItem data={d}></QuadrantsItem>
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ export default function QuadrantsItem({ data }: { data: Todo[] }) {
     const items: CollapseProps['items'] = [
         {
             key: '1',
-            label: <p><span className=" font-bold text-[14px]">收集箱</span> <span className=" text-[#ccc]">{data.length}</span></p>,
+            label: <p className=" text-[14px]"><span className=" font-bold">收集箱</span> <span className=" text-[#ccc]">{data.length}</span></p>,
             children: <div>
                 {
                     data.map(d => <Item key={d.id} />)
@@ -16,7 +16,7 @@ export default function QuadrantsItem({ data }: { data: Todo[] }) {
         },
         {
             key: '2',
-            label: <p><span className=" font-bold text-[14px]">已完成</span> <span className=" text-[#ccc]">{data.length}</span></p>,
+            label: <p className=" text-[14px]"><span className=" font-bold">已完成</span> <span className=" text-[#ccc]">{data.length}</span></p>,
             children: <p>暂无数据</p>,
         },
     ];
