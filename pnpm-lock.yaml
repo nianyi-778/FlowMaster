@@ -32,6 +32,9 @@ dependencies:
   '@tauri-apps/plugin-os':
     specifier: ^2.0.0-beta
     version: 2.0.0-beta.3
+  '@tauri-apps/plugin-positioner':
+    specifier: 2.0.0-beta.3
+    version: 2.0.0-beta.3
   '@tauri-apps/plugin-process':
     specifier: ^2.0.0-beta
     version: 2.0.0-beta.3
@@ -74,6 +77,9 @@ dependencies:
   tailwindcss:
     specifier: ^3.4.3
     version: 3.4.3
+  tauri-controls:
+    specifier: ^0.4.0
+    version: 0.4.0(clsx@2.1.1)(react-dom@18.2.0)(react@18.2.0)(tailwind-merge@1.14.0)
 
 devDependencies:
   '@tauri-apps/cli':
@@ -1492,6 +1498,12 @@ packages:
       '@tauri-apps/api': 2.0.0-beta.11
     dev: false
 
+  /@tauri-apps/plugin-positioner@2.0.0-beta.3:
+    resolution: {integrity: sha512-nw+q7CIo00vRIu1lF6/mNLFZV2KMP1DH8l3ALuxRRpts2j961GEKYq3C60hrvz1ttNpXxs/t+K6toKJL9AHm2w==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.11
+    dev: false
+
   /@tauri-apps/plugin-process@2.0.0-beta.3:
     resolution: {integrity: sha512-N3TkHxoQQb45FP8mbKfcI+e6foR17QlLrrwvPK8SH+LhEP9uo1b5EUvpZM1TIegAmL/3LQIBtJw1loyHVn8Esg==}
     dependencies:
@@ -1785,6 +1797,11 @@ packages:
 
   /classnames@2.5.1:
     resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
+    dev: false
+
+  /clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
     dev: false
 
   /color-convert@1.9.3:
@@ -3546,6 +3563,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: false
 
+  /tailwind-merge@1.14.0:
+    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
+    dev: false
+
   /tailwindcss@3.4.3:
     resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}
     engines: {node: '>=14.0.0'}
@@ -3575,6 +3596,20 @@ packages:
       sucrase: 3.35.0
     transitivePeerDependencies:
       - ts-node
+    dev: false
+
+  /tauri-controls@0.4.0(clsx@2.1.1)(react-dom@18.2.0)(react@18.2.0)(tailwind-merge@1.14.0):
+    resolution: {integrity: sha512-M+by1V9wO6GPHL7/MXb2weAaUc0T6JzDhcuTvQF92x3kGsmfkj37F/HXHeslgQwLVLOaIBxwzTFmwsVWVH8o0g==}
+    peerDependencies:
+      clsx: ^2.0.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      tailwind-merge: ^1.14.0
+    dependencies:
+      clsx: 2.1.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tailwind-merge: 1.14.0
     dev: false
 
   /thenify-all@1.6.0:

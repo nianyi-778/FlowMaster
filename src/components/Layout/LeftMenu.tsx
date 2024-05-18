@@ -11,7 +11,7 @@ export default function LeftMenu() {
     const navigate = useNavigate();
     const [active, setActive] = useState(1);
 
-    return <ul className=" bg-[#f1f4ff]  pt-[10px] w-[52px]" data-tauri-drag-region>
+    return <ul className=" bg-[#f1f4ff] flex-1 pt-[10px] w-[52px]" data-tauri-drag-region>
         <li className="mx-[4px]  flex items-center justify-center mb-[10px]">
             <Avatar shape="square" icon={<UserOutlined />} />
         </li>

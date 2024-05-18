@@ -72,7 +72,7 @@ export default function AddTodo() {
         </div>
         <div className=" px-[10px] w-full">
             <div className=" pt-[2px]">
-                <Input size="large" className=" border-none hover:border-none focus:shadow-none font-bold" placeholder="准备做什么？" />
+                <Input size="large" autoFocus className=" border-none hover:border-none focus:shadow-none font-bold focus-within::border-none focus-within:shadow-none" placeholder="准备做什么？" />
             </div>
             <TextArea className=" border-none hover:border-none focus:shadow-none text-[14px] focus-within::border-none focus-within:shadow-none" size="large"
                 showCount
