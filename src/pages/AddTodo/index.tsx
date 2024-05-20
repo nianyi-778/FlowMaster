@@ -1,6 +1,8 @@
 import { useRef, useState } from "react"
-import { Input, Popover } from 'antd';
+import { Input, Popover, Tooltip } from 'antd';
 import Icon from "@/components/Icon";
+import styles from './index.module.less';
+
 
 const { TextArea } = Input;
 
@@ -49,7 +51,9 @@ export default function AddTodo() {
         levels.map(level => <p onClick={() => {
             setLevel(level.level);
             setOpen(false);
-        }} className=" cursor-pointer leading-[30px] flex items-center" key={level.level}>
+        }}
+            className=" cursor-pointer leading-[30px] flex items-center hover:bg-[#f7f7f7] px-[12px]"
+            key={level.level}>
             <Icon styles={{
                 color: level.color
             }} classNames={`text-[16px] mr-[4px]`} name="icon-hongqi"></Icon>{level.label}优先级
@@ -57,17 +61,21 @@ export default function AddTodo() {
     }</div>
 
     return <div ref={ref} className=" w-full h-full bg-white ">
-        <div className=" flex justify-between items-center px-[10px] h-[44px] border-b-[#f2f2f2] border-b">
+        <div className=" flex justify-between items-center px-[20px] h-[44px] border-b-[#f2f2f2] border-b">
             <span>设置日期</span>
             <Popover content={content}
+                overlayClassName={styles.level}
                 open={open}
                 onOpenChange={handleOpenChange}
                 placement="bottomLeft" trigger="click">
-                <span className=" cursor-pointer">
-                    <Icon name="icon-hongqi" classNames={`text-[20px]`} styles={{
-                        color: curColor?.color
-                    }}></Icon>
-                </span>
+                <Tooltip title="优先级">
+                    <span className=" cursor-pointer">
+                        <Icon name="icon-hongqi" classNames={`text-[20px]`} styles={{
+                            color: curColor?.color
+                        }}></Icon>
+                    </span>
+                </Tooltip>
+
             </Popover>
         </div>
         <div className=" px-[10px] w-full">

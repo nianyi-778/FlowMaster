@@ -25,3 +25,9 @@
   -ms-user-select: none; /* IE10+ */
   user-select: none; /* 标准语法 */
 }
+
+html,
+body {
+  background: transparent;
+  border-radius: 20px;
+}

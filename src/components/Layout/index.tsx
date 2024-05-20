@@ -6,7 +6,7 @@ import Title from './Title';
 export default function Layout() {
 
     return <div className=' w-lvh h-lvh '>
-        <div className=' w-full h-[28px]' >
+        <div className=' w-full h-[28px] bg-[#f8faff]' >
             <Title />
         </div>
         <div className=' flex-1 flex  h-[calc(100vh-28px)]'>

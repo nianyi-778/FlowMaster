@@ -33,9 +33,10 @@
         "titleBarStyle": "Overlay",
         "decorations": false,
         "transparent": false,
+        "hiddenTitle": true,
         "width": 800,
         "height": 600,
-        "title": "",
+        "title": "磨刀不误砍柴工",
         "minWidth": 800,
         "minHeight": 600
       }
