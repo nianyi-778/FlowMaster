@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { Input, Popover, Tooltip } from 'antd';
 import Icon from "@/components/Icon";
 import styles from './index.module.less';
-
+import { useTodoStore } from '@/store'
 
 const { TextArea } = Input;
 
@@ -12,7 +12,6 @@ enum LevelType {
     low,
     none
 }
-
 
 const levels = [
     {
@@ -38,10 +37,13 @@ const levels = [
 
 
 export default function AddTodo() {
+
     const ref = useRef<HTMLDivElement>(null);
     const [curLevel, setLevel] = useState<LevelType>(LevelType.none);
     const [open, setOpen] = useState(false);
     const curColor = levels.find(l => l.level === curLevel);
+    const current = useTodoStore((state) => state.current);
+    console.log(current);
 
     const handleOpenChange = (newOpen: boolean) => {
         setOpen(newOpen);

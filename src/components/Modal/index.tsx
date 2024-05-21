@@ -5,6 +5,7 @@ import { getCurrent } from '@tauri-apps/api/window';
 
 export default function Modal(
     { children,
+        onFirstClick,
         classNames,
         styles = {},
         windowLabel,
@@ -12,10 +13,14 @@ export default function Modal(
         defaultHeight = 300,
         url
     }:
-        { children: ReactNode; classNames?: string; styles?: CSSProperties; windowLabel: string; defaultWidth?: number; defaultHeight?: number; url: string; }
+        {
+            onFirstClick?: () => Promise<void>,
+            children: ReactNode; classNames?: string; styles?: CSSProperties; windowLabel: string; defaultWidth?: number; defaultHeight?: number; url: string;
+        }
 ) {
 
-    const onAdd = useCallback(async (event: any) => {
+    const onAdd = useCallback(async (event: { screenX: number; screenY: number; }) => {
+        await onFirstClick?.();
         const space = 20;
         var x = event.screenX;
         var y = event.screenY;
@@ -52,7 +57,7 @@ export default function Modal(
             // 获取焦点
             webview.close();
         })
-    }, [])
+    }, [onFirstClick])
 
     return <span onClick={onAdd} className={`${classNames}`} style={styles}>
         {children}
