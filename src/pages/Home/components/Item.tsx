@@ -8,7 +8,7 @@ export default function Item({ title, describe, id }: { title: string, describe?
             <Checkbox></Checkbox>
             <Modal onFirstClick={async () => {
                 setCurrent(id);
-            }} windowLabel="AddTodoModal" url="/AddTodo" classNames="flex-1">
+            }} windowLabel="updateTodoModal" url={`/updateTodo/${id}`} classNames="flex-1">
                 <p className={`ml-[6px]  overflow-hidden truncate `}>{title}</p>
             </Modal>
             <div className=" right-0 pl-[6px] ">

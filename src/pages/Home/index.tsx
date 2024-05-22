@@ -72,7 +72,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col h-full ">
                         <h2 className="  font-bold no-select flex justify-between  h-[24px]">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#ef4444] before:text-white text-[#ef4444]"> 重要且紧急</span>
-                            <Modal windowLabel="AddTodoModal" url="/AddTodo">
+                            <Modal windowLabel="AddTodoModal" url={`/addTodo/${Quadrant.First}`}>
                                 <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                             </Modal>
                         </h2>
@@ -85,7 +85,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col h-full ">
                         <h2 className="  font-bold no-select flex justify-between  h-[24px]">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white text-[#eab308]"> 重要不紧急</span>
-                            <Modal windowLabel="AddTodoModal" url="/AddTodo">
+                            <Modal windowLabel="AddTodoModal" url={`/addTodo/${Quadrant.NumberFour}`}>
                                 <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                             </Modal>
                         </h2>
@@ -101,7 +101,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col h-full ">
                         <h2 className="  font-bold no-select flex justify-between  h-[24px]">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white text-[#3b82f6]"> 不重要但紧急</span>
-                            <Modal windowLabel="AddTodoModal" url="/AddTodo">
+                            <Modal windowLabel="AddTodoModal" url={`/addTodo/${Quadrant.Second}`}>
                                 <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                             </Modal>
                         </h2>
@@ -116,7 +116,7 @@ export default function Quadrants() {
                     <div className=" overflow-hidden flex  flex-col h-full ">
                         <h2 className="  font-bold no-select flex justify-between  h-[24px]">
                             <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white text-[#22c55e]"> 不重要不紧急</span>
-                            <Modal windowLabel="AddTodoModal" url="/AddTodo">
+                            <Modal windowLabel="AddTodoModal" url={`/addTodo/${Quadrant.Third}`}>
                                 <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  w-[22px] flex items-center justify-center hover:bg-[#f2f2f2]" />
                             </Modal>
                         </h2>

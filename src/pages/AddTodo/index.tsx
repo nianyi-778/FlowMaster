@@ -1,35 +1,29 @@
-import { useRef, useState } from "react"
+import { SetStateAction, useCallback, useEffect, useRef, useState } from "react"
 import { Input, Popover, Tooltip } from 'antd';
 import Icon from "@/components/Icon";
 import styles from './index.module.less';
-import { useTodoStore } from '@/store'
-
+import { useParams } from 'react-router-dom';
+import { invoke } from "@tauri-apps/api/core";
+import { Quadrant, Todo } from "@/types/todo";
 const { TextArea } = Input;
-
-enum LevelType {
-    high = 1,
-    medium,
-    low,
-    none
-}
 
 const levels = [
     {
-        level: LevelType.high,
+        level: Quadrant.First,
         label: "高",
         color: "#c33d30"
     },
     {
-        level: LevelType.medium,
+        level: Quadrant.NumberFour,
         label: "中",
         color: "#eeac3e"
     },
     {
-        level: LevelType.low,
+        level: Quadrant.Second,
         label: "低",
         color: "#5070f2"
     }, {
-        level: LevelType.none,
+        level: Quadrant.Third,
         label: "无",
         color: "#999998"
     }
@@ -37,17 +31,45 @@ const levels = [
 
 
 export default function AddTodo() {
-
+    const { id, type = Quadrant.Third } = useParams();
     const ref = useRef<HTMLDivElement>(null);
-    const [curLevel, setLevel] = useState<LevelType>(LevelType.none);
+    const [curLevel, setLevel] = useState<Quadrant>(+type);
     const [open, setOpen] = useState(false);
     const curColor = levels.find(l => l.level === curLevel);
-    const current = useTodoStore((state) => state.current);
-    console.log(current);
+    const [title, setTitle] = useState<string>();
+    const [describe, setDescribe] = useState<string>();
+
+    useEffect(() => {
+        // const 
+        if (id) {
+            invoke<Todo>('get_todo', { id }).then((res) => {
+                if (res) {
+                    setLevel(res.quadrant);
+                    setDescribe(res.describe);
+                    setTitle(res.title);
+                }
+            });
+        };
+
+        return () => {
+            (async () => {
+                const result = await invoke<Todo>('update_todo', { id });
+                console.log(result);
+            })()
+        }
+    }, [id]);
+
 
     const handleOpenChange = (newOpen: boolean) => {
         setOpen(newOpen);
     };
+
+    const onInputChange = (e: { target: { value: SetStateAction<string | undefined>; }; }) => {
+        setTitle(e.target.value);
+    }
+    const onTextAreaChange = (e: { target: { value: SetStateAction<string | undefined>; }; }) => {
+        setDescribe(e.target.value)
+    }
 
     const content = <div className=" w-[130px]">{
         levels.map(level => <p onClick={() => {
@@ -82,10 +104,14 @@ export default function AddTodo() {
         </div>
         <div className=" px-[10px] w-full">
             <div className=" pt-[2px]">
-                <Input size="large" autoFocus className=" border-none hover:border-none focus:shadow-none font-bold focus-within::border-none focus-within:shadow-none" placeholder="准备做什么？" />
+                <Input size="large"
+                    onChange={onInputChange}
+                    value={title} autoFocus className=" border-none hover:border-none focus:shadow-none font-bold focus-within::border-none focus-within:shadow-none" placeholder="准备做什么？" />
             </div>
             <TextArea className=" border-none hover:border-none focus:shadow-none text-[14px] focus-within::border-none focus-within:shadow-none" size="large"
                 showCount
+                onChange={onTextAreaChange}
+                value={describe}
                 style={{ height: 180, resize: 'none' }}
                 placeholder="描述" maxLength={120} />
         </div>

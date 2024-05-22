@@ -18,7 +18,11 @@ export const router = createBrowserRouter([
         ]
       },
       {
-        path: "AddTodo",
+        path: "addTodo/:type",
+        element: <AddTodo />
+      },
+      {
+        path: "updateTodo/:id",
         element: <AddTodo />
       }
     ]

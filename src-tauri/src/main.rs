@@ -29,6 +29,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             get_todos,
+            get_todo,
             new_todo,
             toggle_done,
             update_todo,
@@ -42,6 +43,13 @@ fn get_todos(state: tauri::State<AppState>, todo_type: u8) -> Vec<Todo> {
     let app = state.app.lock().unwrap();
     let todos = app.get_todos(todo_type).unwrap();
     todos
+}
+
+#[tauri::command]
+fn get_todo(state: tauri::State<AppState>, id: String) -> Todo {
+    let app = state.app.lock().unwrap();
+    let result = app.get_todo(id).unwrap();
+    result
 }
 
 #[tauri::command]
