@@ -74,8 +74,11 @@ fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
         title,
         describe,
         done,
+        quadrant,
         is_delete,
         todo_type,
+        end_time,
+        created_at,
         ..
     } = app.get_todo(id).unwrap();
 
@@ -89,10 +92,10 @@ fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
         done: !done,
         is_delete,
         todo_type,
-        quadrant: 1,
+        quadrant,
         updated_at: current_timestamp,
-        end_time: 0,
-        created_at: 0,
+        end_time,
+        created_at,
     });
     result
 }

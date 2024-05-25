@@ -25,7 +25,7 @@ pub struct TodoApp {
 impl TodoApp {
     pub fn new() -> Result<TodoApp> {
         println!("add {}", add(1, 3));
-        let db_path = "db.sqlite";
+        let db_path = "../db.sqlite";
         let conn = Connection::open(db_path)?;
         conn.execute(
             "CREATE TABLE IF NOT EXISTS todo (
@@ -125,18 +125,20 @@ impl TodoApp {
             is_delete,
             id,
             todo_type,
+            updated_at,
             ..
         } = todo;
         let done = if done == true { 1 } else { 0 };
         let is_delete = if is_delete == true { 1 } else { 0 };
         match self.conn.execute(
             "UPDATE todo
-        SET describe = ?1, done = ?2, is_delete = ?3 type = ?4, WHERE id = ?5",
+        SET describe = ?1, done = ?2, is_delete = ?3, type = ?4, updated_at = ?5 WHERE id = ?6",
             [
                 describe,
                 done.to_string(),
                 is_delete.to_string(),
                 todo_type.to_string(),
+                updated_at.to_string(),
                 id.to_string(),
             ],
         ) {
