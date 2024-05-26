@@ -1,10 +1,13 @@
-import { SetStateAction, useCallback, useEffect, useRef, useState } from "react"
+import { SetStateAction, useEffect, useRef, useState } from "react"
 import { Input, Popover, Tooltip } from 'antd';
 import Icon from "@/components/Icon";
 import styles from './index.module.less';
 import { useParams } from 'react-router-dom';
 import { invoke } from "@tauri-apps/api/core";
 import { Quadrant, Todo } from "@/types/todo";
+import { getCurrent } from '@tauri-apps/api/window';
+import { TauriEvent } from "@tauri-apps/api/event";
+
 const { TextArea } = Input;
 
 const levels = [
@@ -35,15 +38,26 @@ export default function AddTodo() {
     const ref = useRef<HTMLDivElement>(null);
     const [curLevel, setLevel] = useState<Quadrant>(+type);
     const [open, setOpen] = useState(false);
-    const curColor = levels.find(l => l.level === curLevel);
+    const curLevelIndex = levels.findIndex(l => l.level === curLevel);
     const [title, setTitle] = useState<string>();
     const [describe, setDescribe] = useState<string>();
-
     useEffect(() => {
-        // const 
+        let cur: Todo | null = null;
+        (async () => {
+            const win = await getCurrent();
+            win.once(TauriEvent.WINDOW_CLOSE_REQUESTED, async () => {
+                if (cur) {
+                    const result = await invoke<Todo>('update_todo', { ...cur, id });
+                    console.log(result, 'update');
+                }
+                // win.close();
+            })
+        })()
+
         if (id) {
             invoke<Todo>('get_todo', { id }).then((res) => {
                 if (res) {
+                    cur = res;
                     setLevel(res.quadrant);
                     setDescribe(res.describe);
                     setTitle(res.title);
@@ -51,12 +65,12 @@ export default function AddTodo() {
             });
         };
 
-        return () => {
-            (async () => {
-                const result = await invoke<Todo>('update_todo', { id });
-                console.log(result);
-            })()
-        }
+        // return () => {
+        //     (async () => {
+        //         const result = await invoke<Todo>('update_todo', { id });
+        //         console.log(result, 'update');
+        //     })()
+        // }
     }, [id]);
 
 
@@ -76,7 +90,7 @@ export default function AddTodo() {
             setLevel(level.level);
             setOpen(false);
         }}
-            className=" cursor-pointer leading-[30px] flex items-center hover:bg-[#f7f7f7] px-[12px]"
+            className={` cursor-pointer leading-[30px] flex items-center hover:bg-[#f7f7f7] px-[12px]`}
             key={level.level}>
             <Icon styles={{
                 color: level.color
@@ -95,7 +109,7 @@ export default function AddTodo() {
                 <Tooltip title="优先级">
                     <span className=" cursor-pointer">
                         <Icon name="icon-hongqi" classNames={`text-[20px]`} styles={{
-                            color: curColor?.color
+                            color: levels[curLevelIndex]?.color
                         }}></Icon>
                     </span>
                 </Tooltip>
