@@ -62,7 +62,31 @@ fn new_todo(state: tauri::State<AppState>, todo: Todo) -> bool {
 #[tauri::command]
 fn update_todo(state: tauri::State<AppState>, todo: Todo) -> bool {
     let app = state.app.lock().unwrap();
-    let result = app.update_todo(todo);
+    let Todo {
+        id,
+        title,
+        describe,
+        done,
+        quadrant,
+        is_delete,
+        todo_type,
+        end_time,
+        created_at,
+        ..
+    } = app.get_todo(todo.id.to_string()).unwrap();
+
+    let result = app.update_todo(Todo {
+        id,
+        title,
+        describe,
+        done,
+        quadrant,
+        is_delete,
+        todo_type,
+        end_time,
+        created_at,
+        updated_at: Utc::now().timestamp_millis(),
+    });
     result
 }
 
@@ -82,8 +106,7 @@ fn toggle_done(state: tauri::State<AppState>, id: String) -> bool {
         ..
     } = app.get_todo(id).unwrap();
 
-    let current_timestamp = Utc::now().timestamp();
-    println!("Current timestamp: {}", current_timestamp);
+    let current_timestamp = Utc::now().timestamp_millis();
 
     let result = app.update_todo(Todo {
         id,

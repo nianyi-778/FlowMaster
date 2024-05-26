@@ -3,6 +3,7 @@
   "description": "permissions that were migrated from v1",
   "windows": [
     "main",
+    "updateTodoModal",
     "AddTodoModal"
   ],
   "permissions": [

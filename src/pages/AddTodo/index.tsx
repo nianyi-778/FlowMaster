@@ -42,36 +42,30 @@ export default function AddTodo() {
     const [title, setTitle] = useState<string>();
     const [describe, setDescribe] = useState<string>();
     useEffect(() => {
-        let cur: Todo | null = null;
-        (async () => {
-            const win = await getCurrent();
-            win.once(TauriEvent.WINDOW_CLOSE_REQUESTED, async () => {
-                if (cur) {
-                    const result = await invoke<Todo>('update_todo', { ...cur, id });
-                    console.log(result, 'update');
-                }
-                // win.close();
-            })
-        })()
-
         if (id) {
             invoke<Todo>('get_todo', { id }).then((res) => {
                 if (res) {
-                    cur = res;
                     setLevel(res.quadrant);
                     setDescribe(res.describe);
                     setTitle(res.title);
                 }
             });
         };
-
-        // return () => {
-        //     (async () => {
-        //         const result = await invoke<Todo>('update_todo', { id });
-        //         console.log(result, 'update');
-        //     })()
-        // }
     }, [id]);
+
+
+    useEffect(() => {
+        (async () => {
+            const win = await getCurrent();
+            win.once(TauriEvent.WINDOW_CLOSE_REQUESTED, async () => {
+                if (id) {
+                    const result = await invoke<Todo>('update_todo', { todo: { id: +id, title, describe } });
+                    console.log(result, 'update');
+                }
+                win.close();
+            })
+        })()
+    }, [id, title, describe])
 
 
     const handleOpenChange = (newOpen: boolean) => {
