@@ -53,7 +53,7 @@ export default function AddTodo() {
     }, [id]);
 
     useUpdateTodoOnClose({
-        id, title, describe
+        id, title, describe, level: curLevel
     })
 
     const handleOpenChange = (newOpen: boolean) => {

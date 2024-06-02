@@ -6,7 +6,7 @@ import { invoke } from "@tauri-apps/api/core";
 
 export default function Item({ title, describe, id }: { title: string, describe?: string; id: string }) {
     const setCurrent = useTodoStore((state) => state.setCurrent)
-
+    console.log(describe, 'describe');
     const onChange: CheckboxProps['onChange'] = (e) => {
         console.log(`checked = ${e.target.checked}`);
         invoke<boolean>('toggle_done', { id: id.toString() }).then((res) => {

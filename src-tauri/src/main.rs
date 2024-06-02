@@ -6,7 +6,7 @@ mod todo;
 mod utils;
 use chrono::Utc;
 use std::sync::Mutex;
-use todo::{Todo, TodoApp};
+use todo::{Todo, TodoAdd, TodoApp};
 
 struct AppState {
     app: Mutex<TodoApp>,
@@ -53,7 +53,7 @@ fn get_todo(state: tauri::State<AppState>, id: String) -> Todo {
 }
 
 #[tauri::command]
-fn new_todo(state: tauri::State<AppState>, todo: Todo) -> bool {
+fn new_todo(state: tauri::State<AppState>, todo: TodoAdd) -> bool {
     let app = state.app.lock().unwrap();
     let result = app.new_todo(todo);
     result

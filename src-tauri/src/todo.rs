@@ -18,6 +18,12 @@ pub struct Todo {
     pub quadrant: u8,
 }
 
+pub struct TodoAdd {
+    pub title: String,
+    pub describe: String,
+    pub quadrant: u8,
+}
+
 pub struct TodoApp {
     pub conn: Connection,
 }
@@ -96,16 +102,15 @@ impl TodoApp {
         Ok(todos)
     }
 
-    pub fn new_todo(&self, todo: Todo) -> bool {
-        let Todo {
-            id,
+    pub fn new_todo(&self, todo: TodoAdd) -> bool {
+        let TodoAdd {
+            title,
             describe,
-            todo_type,
-            ..
+            quadrant,
         } = todo;
         match self.conn.execute(
-            "INSERT INTO todo (id, describe, type) VALUES (?, ?, ?)",
-            [id.to_string(), describe, todo_type.to_string()],
+            "INSERT INTO todo (id, describe, quadrant) VALUES (?, ?, ?)",
+            [title, describe, quadrant.to_string()],
         ) {
             Ok(insert) => {
                 println!("{} row inserted", insert);
