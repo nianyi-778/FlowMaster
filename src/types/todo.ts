@@ -5,6 +5,7 @@ export interface Todo {
   done: boolean;
   end_time?: number;
   quadrant: Quadrant;
+  updated_at?: number;
 }
 
 export enum Quadrant {

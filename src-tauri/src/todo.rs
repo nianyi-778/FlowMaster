@@ -120,6 +120,7 @@ impl TodoApp {
 
     pub fn update_todo(&self, todo: Todo) -> bool {
         let Todo {
+            title,
             describe,
             done,
             is_delete,
@@ -128,11 +129,12 @@ impl TodoApp {
             updated_at,
             ..
         } = todo;
+
         let done = if done == true { 1 } else { 0 };
         let is_delete = if is_delete == true { 1 } else { 0 };
         match self.conn.execute(
             "UPDATE todo
-        SET describe = ?1, done = ?2, is_delete = ?3, type = ?4, updated_at = ?5 WHERE id = ?6",
+        SET describe = ?1, done = ?2, title = ?7, is_delete = ?3, type = ?4, updated_at = ?5 WHERE id = ?6",
             [
                 describe,
                 done.to_string(),
@@ -140,6 +142,7 @@ impl TodoApp {
                 todo_type.to_string(),
                 updated_at.to_string(),
                 id.to_string(),
+                title
             ],
         ) {
             Ok(update) => {

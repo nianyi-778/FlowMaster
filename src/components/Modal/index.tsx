@@ -1,7 +1,7 @@
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { CSSProperties, ReactNode, useCallback } from "react";
 import { getCurrent } from '@tauri-apps/api/window';
-
+import { throttle } from 'lodash-es';
 
 export default function Modal(
     { children,
@@ -47,8 +47,16 @@ export default function Modal(
             resizable: false,
             contentProtected: true
         })
-        webview.once('tauri://created', function () {
-            // webview window successfully created
+        webview.listen('tauri://focus', () => {
+            console.log('Window focused');
+        });
+        webview.once('tauri://created', async function () {
+            // const isFocused = await webview.isFocused();
+            // if (!isFocused) {
+            //     setTimeout(() => {
+            //         webview.setFocus();
+            //     }, 500);
+            // }
         })
         webview.once('tauri://error', function () {
             // an error occurred during webview window creation
@@ -59,7 +67,7 @@ export default function Modal(
         })
     }, [onFirstClick])
 
-    return <span onClick={onAdd} className={`${classNames}`} style={styles}>
+    return <span onClick={throttle(onAdd, 500)} className={`${classNames}`} style={styles}>
         {children}
     </span>
 }

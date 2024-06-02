@@ -5,8 +5,7 @@ import styles from './index.module.less';
 import { useParams } from 'react-router-dom';
 import { invoke } from "@tauri-apps/api/core";
 import { Quadrant, Todo } from "@/types/todo";
-import { getCurrent } from '@tauri-apps/api/window';
-import { TauriEvent } from "@tauri-apps/api/event";
+import useUpdateTodoOnClose from "@/hooks/useUpdateTodoOnClose";
 
 const { TextArea } = Input;
 
@@ -53,20 +52,9 @@ export default function AddTodo() {
         };
     }, [id]);
 
-
-    useEffect(() => {
-        (async () => {
-            const win = await getCurrent();
-            win.once(TauriEvent.WINDOW_CLOSE_REQUESTED, async () => {
-                if (id) {
-                    const result = await invoke<Todo>('update_todo', { todo: { id: +id, title, describe } });
-                    console.log(result, 'update');
-                }
-                win.close();
-            })
-        })()
-    }, [id, title, describe])
-
+    useUpdateTodoOnClose({
+        id, title, describe
+    })
 
     const handleOpenChange = (newOpen: boolean) => {
         setOpen(newOpen);
