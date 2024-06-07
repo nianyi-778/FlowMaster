@@ -1,0 +1,46 @@
+.container {
+  transition: all 0.3s;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  flex: 1;
+
+  .item {
+    transition: all 0.3s;
+    border-radius: 10px;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 10px;
+    }
+    &::after {
+      bottom: 0;
+      background: rgb(255, 255, 255);
+      background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+  }
+}
+
+.collapse {
+  :global {
+    .ant-collapse-header {
+      padding-left: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    .ant-collapse-content-box {
+      padding: 0 !important;
+    }
+    .ant-collapse-expand-icon {
+      margin-inline-start: 0 !important;
+      padding-inline-end: 6px !important;
+      color: #b1b1b1;
+    }
+  }
+}
+
+// :global{
+//   .ant-popover .ant-popover-inner{
+//     padding: 0;
+//   }
+// }
