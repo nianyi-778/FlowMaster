@@ -19,18 +19,27 @@ export default function Modal(
 
     const onAdd = useCallback(async (event: { screenX: number; screenY: number; }) => {
         await onFirstClick?.();
-        // const space = 20;
-        // var x = event.screenX;
-        // var y = event.screenY;
-        // const curWin = await getCurrent();
-        // const { width: screenWidth } = window.screen;
-        // let newX = x + space;
-        // let newY = y - space;
 
-        // if (newX + defaultWidth > screenWidth) {
-        //     newX = x - space - defaultWidth;
-        // }
+        const space = 20;
+        const x = event.screenX;
+        const y = event.screenY;
+        const { width: screenWidth } = window.screen;
+        let newX = x + space;
+        const newY = y - space;
 
+        if (newX + defaultWidth > screenWidth) {
+            newX = x - space - defaultWidth;
+        }
+        console.log(window.ipcRenderer, 'window.ipcRenderer')
+        window.ipcRenderer.send("CreateWin", {
+            url,
+            options: {
+                "width": defaultWidth,
+                "height": defaultHeight,
+                x: newX,
+                y: newY,
+            }
+        })
         // const webview = new WebviewWindow(windowLabel, {
         //     url,
         //     "width": defaultWidth,
@@ -63,7 +72,7 @@ export default function Modal(
         //     // 获取焦点
         //     webview.close();
         // })
-    }, [onFirstClick])
+    }, [defaultHeight, defaultWidth, onFirstClick, url])
 
     return <span onClick={throttle(onAdd, 500)} className={`${classNames}`} style={styles}>
         {children}

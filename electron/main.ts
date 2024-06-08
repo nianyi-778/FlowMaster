@@ -1,9 +1,10 @@
 import { app, BrowserWindow } from "electron";
-import { createRequire } from "node:module";
+// import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { ipcInject } from "./ipc";
 
-const require = createRequire(import.meta.url);
+// const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
@@ -45,6 +46,7 @@ function createWindow() {
     },
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
+      nodeIntegration: true,
       preload: path.join(__dirname, "preload.mjs"),
     },
   });
@@ -60,9 +62,11 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
-  win.openDevTools({
-    mode: "bottom",
-  });
+  if (win) {
+    win?.openDevTools({
+      mode: "bottom",
+    });
+  }
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -83,4 +87,7 @@ app.on("activate", () => {
   }
 });
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  ipcInject();
+  createWindow();
+});

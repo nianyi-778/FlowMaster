@@ -1,10 +1,11 @@
-import { ipcRenderer, contextBridge } from "electron";
+import { ipcRenderer, contextBridge, IpcRendererEvent } from "electron";
+// import { CreateWin, CreateWinName } from "./ipc/createWin";
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args: Parameters<typeof ipcRenderer.on>) {
     const [channel, listener] = args;
-    return ipcRenderer.on(channel, (event: unknown, ...args: unknown[]) =>
+    return ipcRenderer.on(channel, (event: IpcRendererEvent, ...args: IpcRendererEvent[]) =>
       listener(event, ...args)
     );
   },
@@ -20,7 +21,6 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     const [channel, ...omit] = args;
     return ipcRenderer.invoke(channel, ...omit);
   },
-
   // You can expose other APTs you need here.
-  // ...
+  // createWin: (args: CreateWin) => ipcRenderer.send(CreateWinName, args),
 });
