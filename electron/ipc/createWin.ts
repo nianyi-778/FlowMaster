@@ -15,8 +15,9 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
     parent: top ? top : undefined,
     show: false,
     movable: false,
+    transparent: true,
+    frame: false,
     resizable: false,
-    titleBarStyle: "hidden",
     ...options,
   });
   // 加载页面

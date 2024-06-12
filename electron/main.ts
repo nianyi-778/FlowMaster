@@ -29,6 +29,8 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 
 let win: BrowserWindow | null;
 
+// const isMac = process.platform === "darwin";
+
 function createWindow() {
   win = new BrowserWindow({
     width: 800,
@@ -36,11 +38,12 @@ function createWindow() {
     title: "磨刀不误砍柴工",
     minWidth: 800,
     minHeight: 600,
-    // transparent: true,
+    show: false,
+    titleBarStyle: "hidden",
+    transparent: true,
     backgroundColor: "#00000000",
     frame: false,
     resizable: true,
-    titleBarStyle: "hidden",
     titleBarOverlay: {
       color: "#f8faff",
     },
@@ -63,6 +66,11 @@ function createWindow() {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
   if (win) {
+    // 减少显示空白窗口的时间
+    win.once("ready-to-show", () => {
+      win && win.show();
+    });
+
     win?.openDevTools({
       mode: "bottom",
     });
