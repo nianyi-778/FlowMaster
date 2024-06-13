@@ -16,6 +16,7 @@ export default function Modal(
             children: ReactNode; classNames?: string; styles?: CSSProperties; windowLabel: string; defaultWidth?: number; defaultHeight?: number; url: string;
         }
 ) {
+    console.log(windowLabel);
 
     const onAdd = useCallback(async (event: { screenX: number; screenY: number; }) => {
         await onFirstClick?.();
@@ -30,7 +31,6 @@ export default function Modal(
         if (newX + defaultWidth > screenWidth) {
             newX = x - space - defaultWidth;
         }
-        console.log(window.ipcRenderer, 'window.ipcRenderer')
         window.ipcRenderer.send("CreateWin", {
             url,
             options: {
@@ -40,38 +40,7 @@ export default function Modal(
                 y: newY,
             }
         })
-        // const webview = new WebviewWindow(windowLabel, {
-        //     url,
-        //     "width": defaultWidth,
-        //     "height": defaultHeight,
-        //     x: newX,
-        //     y: newY,
-        //     decorations: false,
-        //     parent: curWin,
-        //     shadow: true,
-        //     focus: true,
-        //     center: false,
-        //     resizable: false,
-        //     contentProtected: true
-        // })
-        // webview.listen('tauri://focus', () => {
-        //     console.log('Window focused');
-        // });
-        // webview.once('tauri://created', async function () {
-        //     // const isFocused = await webview.isFocused();
-        //     // if (!isFocused) {
-        //     //     setTimeout(() => {
-        //     //         webview.setFocus();
-        //     //     }, 500);
-        //     // }
-        // })
-        // webview.once('tauri://error', function () {
-        //     // an error occurred during webview window creation
-        // })
-        // curWin.once("tauri://focus", function () {
-        //     // 获取焦点
-        //     webview.close();
-        // })
+
     }, [defaultHeight, defaultWidth, onFirstClick, url])
 
     return <span onClick={throttle(onAdd, 500)} className={`${classNames}`} style={styles}>

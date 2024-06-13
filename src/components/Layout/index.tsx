@@ -11,7 +11,7 @@ export default function Layout() {
         </div>
         <div className=' flex-1 flex  h-[calc(100vh-31px)]'>
             <LeftMenu></LeftMenu>
-            <div className=' w-[calc(100vw-52px)]'>
+            <div className=' w-[calc(100vw-66px)]'>
                 <Outlet />
             </div>
         </div>

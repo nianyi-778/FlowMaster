@@ -10,8 +10,8 @@ import { useTodoStore } from '@/store/todo';
 
 export default function Quadrants() {
     const { type = 1 } = useParams();
-    const todos = useTodoStore((state: { list: unknown; }) => state.list);
-    const setTodos = useTodoStore((state: { setTodoList: unknown; }) => state.setTodoList);
+    const todos = useTodoStore((state: { list: unknown; }) => state.list) as Todo[];
+    // const setTodos = useTodoStore((state: { setTodoList: unknown; }) => state.setTodoList);
 
     useEffect(() => {
 

@@ -70,10 +70,6 @@ function createWindow() {
     win.once("ready-to-show", () => {
       win && win.show();
     });
-
-    win?.openDevTools({
-      mode: "bottom",
-    });
   }
 }
 

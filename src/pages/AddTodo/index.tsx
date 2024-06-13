@@ -1,9 +1,9 @@
-import { SetStateAction, useEffect, useRef, useState } from "react"
+import { SetStateAction, useRef, useState } from "react"
 import { Input, Popover, Tooltip } from 'antd';
 import Icon from "@/components/Icon";
 import styles from './index.module.less';
 import { useParams } from 'react-router-dom';
-import { Quadrant, Todo } from "@/types/todo";
+import { Quadrant } from "@/types/todo";
 
 const { TextArea } = Input;
 
@@ -31,7 +31,7 @@ const levels = [
 
 
 export default function AddTodo() {
-    const { id, type = Quadrant.Third } = useParams();
+    const { type = Quadrant.Third } = useParams();
     const ref = useRef<HTMLDivElement>(null);
     const [curLevel, setLevel] = useState<Quadrant>(+type);
     const [open, setOpen] = useState(false);
