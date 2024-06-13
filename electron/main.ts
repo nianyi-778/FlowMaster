@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
 // import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
+import { mainInitHand } from "./dbServices/dbServicesInit";
 import path from "node:path";
 import { ipcInject } from "./ipc";
 
@@ -50,6 +51,8 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: true, // 禁用安全策略
+      webSecurity: false, // 禁用同源策略
       preload: path.join(__dirname, "preload.mjs"),
     },
   });
@@ -61,6 +64,7 @@ function createWindow() {
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL);
+    win.webContents.openDevTools();
   } else {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
@@ -94,4 +98,5 @@ app.on("activate", () => {
 app.whenReady().then(() => {
   ipcInject();
   createWindow();
+  mainInitHand();
 });
