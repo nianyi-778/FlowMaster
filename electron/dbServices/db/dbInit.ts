@@ -11,7 +11,7 @@ export const dbConnectionHand = async () => {
     type: "sqlite",
     // 完整文件路径
     database: dataBase,
-    logging: false,
+    logging: true,
     logger: "simple-console",
     synchronize: true,
     entities: [User],
