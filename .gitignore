@@ -24,3 +24,12 @@ release
 *.njsproj
 *.sln
 *.sw?
+
+
+#lockfile
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+/test-results/
+/playwright-report/
+/playwright/.cache/
