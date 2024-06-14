@@ -6,7 +6,9 @@ import { User } from "./entity/user";
 import path from "node:path";
 export let dataSource: DataSource;
 export const dbConnectionHand = async () => {
+  console.log("dataBase111");
   const dataBase = path.join(getAppHand(), APP_NAME, DB_CONFIG.dbFileName);
+  console.log(dataBase, "dataBase");
   dataSource = new DataSource({
     type: "sqlite",
     // 完整文件路径

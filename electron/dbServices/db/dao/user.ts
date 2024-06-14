@@ -14,7 +14,7 @@ export class userDao {
     }
     return this.instance;
   }
-  getTransactionInstance(manager: () => any) {
+  getTransactionInstance(manager: any) {
     const instance = new userDao();
     instance.repository = manager().getRepository(User);
     return instance;
@@ -28,7 +28,15 @@ export class userDao {
     // .execute()
     return await this.repository.insert({ userName, nickName });
   }
-  async updateUser({ id, userName, nickName }: { id: number; userName: string; nickName: string }) {
+  async updateUser({
+    id,
+    userName,
+    nickName,
+  }: {
+    id?: number;
+    userName: string;
+    nickName: string;
+  }) {
     return await this.repository.update({ id }, { userName, nickName });
   }
 }

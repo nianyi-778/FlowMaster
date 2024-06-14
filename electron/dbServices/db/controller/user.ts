@@ -9,8 +9,9 @@ export class userController {
     userName: string;
     nickName: string;
   }) {
-    const tick = id ? userServices.updateUser : userServices.addUser;
-    const res = await tick({ id, userName, nickName });
+    const res = id
+      ? await userServices.updateUser({ id, userName, nickName })
+      : userServices.addUser({ userName, nickName });
     return res;
   }
 }
