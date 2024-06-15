@@ -33,6 +33,7 @@ let win: BrowserWindow | null;
 // const isMac = process.platform === "darwin";
 
 function createWindow() {
+  mainInitHand();
   win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -98,5 +99,4 @@ app.on("activate", () => {
 app.whenReady().then(() => {
   ipcInject();
   createWindow();
-  mainInitHand();
 });
