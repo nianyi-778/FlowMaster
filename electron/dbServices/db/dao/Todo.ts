@@ -1,7 +1,9 @@
+// import { EntityManager } from "typeorm";
+import { Quadrant } from "../../../ipc/todoCurd";
 import { dataSource } from "../dbInit";
 import { Todo } from "../entity/Todo";
-export class userDao {
-  static instance: unknown;
+export class todoDao {
+  static instance: todoDao;
   repository;
   constructor() {
     console.log("isSer", dataSource.isInitialized);
@@ -10,25 +12,27 @@ export class userDao {
   // 获取实例
   static getInstance() {
     if (!this.instance) {
-      this.instance = new userDao();
+      this.instance = new todoDao();
     }
     return this.instance;
   }
-  getTransactionInstance(manager: any) {
-    const instance = new userDao();
-    instance.repository = manager().getRepository(Todo);
-    return instance;
+  // getTransactionInstance(manager: () => EntityManager) {
+  //   const instance = new todoDao();
+  //   instance.repository = manager().getRepository(Todo);
+  //   return instance;
+  // }
+  async insertTodo({
+    description,
+    title,
+    priority,
+  }: {
+    description: string;
+    title: string;
+    priority?: Quadrant;
+  }) {
+    return await this.repository.insert({ description, title, priority });
   }
-  async insertUser({ userName, nickName }: { userName: string; nickName: string }) {
-    console.log(userName, nickName);
-    // return dataSource.createQueryBuilder()
-    // .insert()
-    // .into(User)
-    // .values({ userName:'ss', nickName:'nnn' })
-    // .execute()
-    return await this.repository.insert({ userName, nickName });
-  }
-  async updateUser({
+  async updateTodo({
     id,
     userName,
     nickName,

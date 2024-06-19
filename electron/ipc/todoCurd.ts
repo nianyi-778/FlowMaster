@@ -1,4 +1,5 @@
 import { IpcMainInvokeEvent } from "electron";
+import { TodoController } from "../dbServices/db/controller/Todo";
 
 export enum Quadrant {
   First = 1,
@@ -7,15 +8,23 @@ export enum Quadrant {
   NumberFour,
 }
 
-export interface TodoAdd {
-  titles: string;
+export interface TodoItem {
+  title: string;
   description: string;
   priority: Quadrant;
+  id?: number;
 }
 
-type Todo = TodoAdd;
+type Todo = TodoItem;
 export const TodoCurdName = "TodoCurd";
 
 export function TodoCurd(_event: IpcMainInvokeEvent, todo: Todo) {
   console.log(todo);
+  const { title, description, priority, id } = todo;
+  TodoController.addOrUpdate({
+    title,
+    description,
+    id,
+    priority,
+  });
 }

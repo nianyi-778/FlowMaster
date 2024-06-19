@@ -40,27 +40,21 @@ export default function AddTodo() {
     const [describe, setDescribe] = useState<string>();
 
     useEffect(() => {
-        function beforeunload(event: BeforeUnloadEvent) {
-            console.log('I do not want to be closed')
+        const handleBeforeUnload = () => {
             window.ipcRenderer.send("TodoCurd", {
                 title,
                 description: describe,
                 priority: curLevel
             });
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
 
-            // Cancel the event as stated by the standard.
-            event.preventDefault();
-            // Chrome requires returnValue to be set.
-            event.returnValue = false;
-        }
-        window.addEventListener('beforeunload', beforeunload);
-
+        window.addEventListener('beforeunload', handleBeforeUnload);
 
         return () => {
-            window.removeEventListener('beforeunload', beforeunload);
-        }
-
-    }, [title, describe, curLevel])
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [title, describe, curLevel]);
 
 
     const handleOpenChange = (newOpen: boolean) => {

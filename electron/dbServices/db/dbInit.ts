@@ -7,7 +7,7 @@ import path from "node:path";
 export let dataSource: DataSource;
 export const dbConnectionHand = async () => {
   const dataBase = path.join(getAppHand(), APP_NAME, DB_CONFIG.dbFileName);
-  console.log(dataBase, "dataBase");
+
   dataSource = new DataSource({
     // 完整文件路径
     database: dataBase,

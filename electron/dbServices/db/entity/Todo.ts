@@ -10,24 +10,33 @@ export const Todo = new EntitySchema({
     },
     title: {
       type: String,
+      nullable: true,
     },
     description: {
       type: String,
+      nullable: true,
     },
     deadline: {
-      type: Date,
-    },
-    type: {
       type: Number,
+      nullable: true,
     },
+    // type: {
+    //   type: Number,
+    //   enum: [1, 2, 3, 4],
+    // },
     status: {
-      type: Boolean,
+      type: Number,
+      default: 0,
+      enum: [0, 1],
     },
     isDeleted: {
-      type: Boolean,
+      type: Number,
+      default: 0,
+      enum: [0, 1],
     },
     priority: {
       type: Number,
+      enum: [1, 2, 3, 4],
     },
   },
 });

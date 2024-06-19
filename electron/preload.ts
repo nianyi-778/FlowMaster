@@ -1,5 +1,4 @@
 import { ipcRenderer, contextBridge, IpcRendererEvent } from "electron";
-// import { CreateWin, CreateWinName } from "./ipc/createWin";
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
@@ -22,5 +21,4 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     return ipcRenderer.invoke(channel, ...omit);
   },
   // You can expose other APTs you need here.
-  // createWin: (args: CreateWin) => ipcRenderer.send(CreateWinName, args),
 });

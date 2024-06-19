@@ -1,4 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions, IpcMainInvokeEvent } from "electron";
+import { webPreferences } from "../main";
 
 export interface CreateWin {
   options: BrowserWindowConstructorOptions;
@@ -10,6 +11,7 @@ export const CreateWinName = "CreateWin";
 export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWin) {
   // 获取焦点窗口
   const top = BrowserWindow.getFocusedWindow();
+
   // 创建窗口
   const child = new BrowserWindow({
     parent: top ? top : undefined,
@@ -18,6 +20,7 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
     transparent: true,
     frame: false,
     resizable: false,
+    webPreferences,
     ...options,
   });
   // 加载页面
@@ -38,7 +41,6 @@ export function WinClosed(_event: IpcMainInvokeEvent, callback: () => void) {
   const top = BrowserWindow.getFocusedWindow();
   top &&
     top.once("closed", () => {
-      console.log(123);
       callback?.();
     });
 }

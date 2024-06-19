@@ -30,6 +30,13 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 
 let win: BrowserWindow | null;
 
+export const webPreferences = {
+  nodeIntegration: true,
+  contextIsolation: true, // 禁用安全策略
+  webSecurity: false, // 禁用同源策略
+  preload: path.join(__dirname, "preload.mjs"),
+};
+
 // const isMac = process.platform === "darwin";
 
 function createWindow() {
@@ -50,12 +57,7 @@ function createWindow() {
       color: "#f8faff",
     },
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: true, // 禁用安全策略
-      webSecurity: false, // 禁用同源策略
-      preload: path.join(__dirname, "preload.mjs"),
-    },
+    webPreferences: webPreferences,
   });
 
   // Test active push message to Renderer-process.
