@@ -31,13 +31,14 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
     });
 }
 
+export const WinClosedName = "WinClosed";
 // 失焦
-export function WinClosed() {
+export function WinClosed(_event: IpcMainInvokeEvent, callback: () => void) {
   // 获取焦点窗口
   const top = BrowserWindow.getFocusedWindow();
   top &&
     top.once("closed", () => {
-      // 123
-      console.log(12312);
+      console.log(123);
+      callback?.();
     });
 }

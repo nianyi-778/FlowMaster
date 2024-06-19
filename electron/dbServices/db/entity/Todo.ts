@@ -26,5 +26,8 @@ export const Todo = new EntitySchema({
     isDeleted: {
       type: Boolean,
     },
+    priority: {
+      type: Number,
+    },
   },
 });

@@ -1,22 +1,22 @@
 import { userDao } from "../dao/Todo";
 
 export class TodoServices {
-  static async addUser(user: { userName: string; nickName: string }) {
+  static async addUser(user: { description: string; title: string }) {
     console.log(user);
     // const res = await userDao.getInstance().insertUser(user);
     return {};
   }
   static async updateUser({
     id,
-    userName,
-    nickName,
+    description,
+    title,
   }: {
     id: number;
-    userName: string;
-    nickName: string;
+    description: string;
+    title: string;
   }) {
     // console.log(userDao.getInstance().update);
-    console.log(id, userName, nickName);
+    console.log(id, title, description);
     // const res = await userDao.getInstance().insertUser(user);
     // return res;
     return userDao.getInstance();

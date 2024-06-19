@@ -2,16 +2,16 @@ import { TodoServices } from "../services/Todo";
 export class TodoController {
   static async addOrUpdate({
     id,
-    userName,
-    nickName,
+    title,
+    description,
   }: {
     id?: number;
-    userName: string;
-    nickName: string;
+    title: string;
+    description: string;
   }) {
     const res = id
-      ? await TodoServices.updateUser({ id, userName, nickName })
-      : TodoServices.addUser({ userName, nickName });
+      ? await TodoServices.updateUser({ id, title, description })
+      : TodoServices.addUser({ description, title });
     return res;
   }
 }
