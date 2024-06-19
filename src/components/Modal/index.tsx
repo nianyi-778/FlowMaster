@@ -6,17 +6,15 @@ export default function Modal(
         onFirstClick,
         classNames,
         styles = {},
-        windowLabel,
         defaultWidth = 400,
         defaultHeight = 300,
         url
     }:
         {
             onFirstClick?: () => Promise<void>,
-            children: ReactNode; classNames?: string; styles?: CSSProperties; windowLabel: string; defaultWidth?: number; defaultHeight?: number; url: string;
+            children: ReactNode; classNames?: string; styles?: CSSProperties; defaultWidth?: number; defaultHeight?: number; url: string;
         }
 ) {
-    console.log(windowLabel);
 
     const onAdd = useCallback(async (event: { screenX: number; screenY: number; }) => {
         await onFirstClick?.();

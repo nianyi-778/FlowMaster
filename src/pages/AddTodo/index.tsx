@@ -1,4 +1,4 @@
-import { SetStateAction, useRef, useState } from "react"
+import { SetStateAction, useEffect, useRef, useState } from "react"
 import { Input, Popover, Tooltip } from 'antd';
 import Icon from "@/components/Icon";
 import styles from './index.module.less';
@@ -38,6 +38,10 @@ export default function AddTodo() {
     const curLevelIndex = levels.findIndex(l => l.level === curLevel);
     const [title, setTitle] = useState<string>();
     const [describe, setDescribe] = useState<string>();
+
+    useEffect(() => {
+        //   
+    }, [])
 
 
     const handleOpenChange = (newOpen: boolean) => {

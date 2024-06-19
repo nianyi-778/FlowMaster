@@ -8,6 +8,9 @@ dependencies:
   '@ant-design/icons':
     specifier: 5.3.6
     version: 5.3.6(react-dom@18.2.0)(react@18.2.0)
+  '@types/node':
+    specifier: ^20.14.5
+    version: 20.14.5
   ahooks:
     specifier: 3.7.11
     version: 3.7.11(react@18.2.0)
@@ -111,7 +114,7 @@ devDependencies:
     version: 5.2.2
   vite:
     specifier: 5.1.6
-    version: 5.1.6(less@4.2.0)
+    version: 5.1.6(@types/node@20.14.5)(less@4.2.0)
   vite-plugin-electron:
     specifier: 0.28.6
     version: 0.28.6(vite-plugin-electron-renderer@0.14.5)
@@ -1985,7 +1988,7 @@ packages:
   /@types/better-sqlite3@7.6.10:
     resolution: {integrity: sha512-TZBjD+yOsyrUJGmcUj6OS3JADk3+UZcNv3NOBqGkM09bZdi28fNZw8ODqbMOLfKCu7RYCO62/ldq1iHbzxqoPw==}
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
     dev: true
 
   /@types/cacheable-request@6.0.3:
@@ -1993,7 +1996,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
       '@types/responselike': 1.0.3
     dev: true
 
@@ -2010,7 +2013,7 @@ packages:
   /@types/fs-extra@9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
     dev: true
 
   /@types/http-cache-semantics@4.0.4:
@@ -2024,7 +2027,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
     dev: true
 
   /@types/lodash-es@4.17.12:
@@ -2045,17 +2048,16 @@ packages:
     resolution: {integrity: sha512-QpLcX9ZSsq3YYUUnD3nFDY8H7wctAhQj/TFKL8Ya8v5fMm3CFXxo8zStsLAl780ltoYoo1WvKUVGBQK+1ifr7g==}
     dev: true
 
-  /@types/node@20.14.2:
-    resolution: {integrity: sha512-xyu6WAMVwv6AKFLB+e/7ySZVr/0zLCzOa7rSpq6jNwpqOrUbcACDWC+53d4n2QHOnDou0fbIsg8wZu/sxrnI4Q==}
+  /@types/node@20.14.5:
+    resolution: {integrity: sha512-aoRR+fJkZT2l0aGOJhuA8frnCSoNX6W7U2mpNq63+BxBIj5BQFt8rHy627kijCmm63ijdSdwvGgpUsU6MBsZZA==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
 
   /@types/plist@3.0.5:
     resolution: {integrity: sha512-E6OCaRmAe4WDmWNsL/9RMqdkkzDCY1etutkflWk4c+AcjDU07Pcz1fQwTX0TQz+Pxqn9i4L1TU3UFpjnrcDgxA==}
     requiresBuild: true
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
       xmlbuilder: 15.1.1
     dev: true
     optional: true
@@ -2079,7 +2081,7 @@ packages:
   /@types/responselike@1.0.3:
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
     dev: true
 
   /@types/scheduler@0.23.0:
@@ -2099,7 +2101,7 @@ packages:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
     requiresBuild: true
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
     dev: true
     optional: true
 
@@ -2250,7 +2252,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.24.7(@babel/core@7.24.7)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.1.6(less@4.2.0)
+      vite: 5.1.6(@types/node@20.14.5)(less@4.2.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3403,7 +3405,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@electron/get': 2.0.3
-      '@types/node': 20.14.2
+      '@types/node': 20.14.5
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -7124,7 +7126,6 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-    dev: true
 
   /universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
@@ -7243,12 +7244,12 @@ packages:
       chalk: 4.1.2
       param-case: 3.0.4
       pascal-case: 3.1.2
-      vite: 5.1.6(less@4.2.0)
+      vite: 5.1.6(@types/node@20.14.5)(less@4.2.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite@5.1.6(less@4.2.0):
+  /vite@5.1.6(@types/node@20.14.5)(less@4.2.0):
     resolution: {integrity: sha512-yYIAZs9nVfRJ/AiOLCA91zzhjsHUgMjB+EigzFb6W2XTLO8JixBCKCjvhKZaye+NKYHCrkv3Oh50dH9EdLU2RA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -7276,6 +7277,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.14.5
       esbuild: 0.19.12
       less: 4.2.0
       postcss: 8.4.38

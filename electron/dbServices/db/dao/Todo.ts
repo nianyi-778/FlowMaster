@@ -1,11 +1,11 @@
 import { dataSource } from "../dbInit";
-import { User } from "../entity/user";
+import { Todo } from "../entity/Todo";
 export class userDao {
   static instance: unknown;
   repository;
   constructor() {
     console.log("isSer", dataSource.isInitialized);
-    this.repository = dataSource.getRepository(User);
+    this.repository = dataSource.getRepository(Todo);
   }
   // 获取实例
   static getInstance() {
@@ -16,7 +16,7 @@ export class userDao {
   }
   getTransactionInstance(manager: any) {
     const instance = new userDao();
-    instance.repository = manager().getRepository(User);
+    instance.repository = manager().getRepository(Todo);
     return instance;
   }
   async insertUser({ userName, nickName }: { userName: string; nickName: string }) {

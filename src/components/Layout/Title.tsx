@@ -6,7 +6,7 @@ export default function Title() {
 
     //  windows
     return <div
-        className={classNames(`${styles.title} bg-[#f8faff] h-full flex justify-between before:content=['*']  before:w-[66px] before:inline-block before:bg-[#f2f4fe]`)}
+        className={classNames(`${styles.title} bg-[#f8faff] h-full flex justify-between before:content=['*']  before:w-[56px] before:inline-block before:bg-[#f2f4fe]`)}
     >
 
     </div>

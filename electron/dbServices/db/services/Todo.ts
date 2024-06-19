@@ -1,6 +1,6 @@
-import { userDao } from "../dao/user";
+import { userDao } from "../dao/Todo";
 
-export class userServices {
+export class TodoServices {
   static async addUser(user: { userName: string; nickName: string }) {
     console.log(user);
     // const res = await userDao.getInstance().insertUser(user);

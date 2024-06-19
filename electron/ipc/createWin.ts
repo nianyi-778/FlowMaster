@@ -22,12 +22,22 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
   });
   // 加载页面
   child.loadURL("http://localhost:5173" + url);
-  //   child.loadURL("https://github.com");
   child.once("ready-to-show", () => {
     child.show();
   });
   top &&
     top.once("focus", () => {
       child.close();
+    });
+}
+
+// 失焦
+export function WinClosed() {
+  // 获取焦点窗口
+  const top = BrowserWindow.getFocusedWindow();
+  top &&
+    top.once("closed", () => {
+      // 123
+      console.log(12312);
     });
 }

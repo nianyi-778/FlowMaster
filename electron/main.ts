@@ -73,7 +73,9 @@ function createWindow() {
   if (win) {
     // 减少显示空白窗口的时间
     win.once("ready-to-show", () => {
-      win && win.show();
+      if (win) {
+        win.show();
+      }
     });
   }
 }
