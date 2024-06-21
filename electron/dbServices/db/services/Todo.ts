@@ -2,6 +2,15 @@ import { Quadrant } from "../../../ipc/todoCurd";
 import { todoDao } from "../dao/Todo";
 
 export class TodoServices {
+  static async getTodoList() {
+    const result = await todoDao.getInstance().getTodoList();
+    return result;
+  }
+
+  static getTodo(id: number) {
+    return todoDao.getInstance().getTodoById(id);
+  }
+
   static async addUser(todo: { description: string; title: string; priority?: Quadrant }) {
     const res = await todoDao.getInstance().insertTodo(todo);
     return res;
@@ -17,10 +26,11 @@ export class TodoServices {
     title: string;
     priority?: Quadrant;
   }) {
-    // console.log(userDao.getInstance().update);
-    console.log(id, title, description);
-    // const res = await userDao.getInstance().insertUser(user);
-    // return res;
-    return todoDao.getInstance();
+    return todoDao.getInstance().updateTodo({
+      id,
+      title,
+      description,
+      priority,
+    });
   }
 }

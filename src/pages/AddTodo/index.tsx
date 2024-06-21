@@ -31,7 +31,7 @@ const levels = [
 
 
 export default function AddTodo() {
-    const { type = Quadrant.Third } = useParams();
+    const { type = Quadrant.Third, id } = useParams();
     const ref = useRef<HTMLDivElement>(null);
     const [curLevel, setLevel] = useState<Quadrant>(+type);
     const [open, setOpen] = useState(false);
@@ -44,7 +44,8 @@ export default function AddTodo() {
             window.ipcRenderer.send("TodoCurd", {
                 title,
                 description: describe,
-                priority: curLevel
+                priority: curLevel,
+                id
             });
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
@@ -54,7 +55,7 @@ export default function AddTodo() {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [title, describe, curLevel]);
+    }, [title, describe, curLevel, id]);
 
 
     const handleOpenChange = (newOpen: boolean) => {

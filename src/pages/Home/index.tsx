@@ -10,13 +10,16 @@ import { useTodoStore } from '@/store/todo';
 
 export default function Quadrants() {
     const { type = 1 } = useParams();
-    const todos = useTodoStore((state: { list: unknown; }) => state.list) as Todo[];
-    // const setTodos = useTodoStore((state: { setTodoList: unknown; }) => state.setTodoList);
+    const todos = useTodoStore((state: { list: Todo[] }) => state.list);
+    const setTodos = useTodoStore((state: { setTodoList: (x: Todo[]) => void; }) => state.setTodoList);
 
     useEffect(() => {
+        (async () => {
+            const result = await window.ipcRenderer.invoke("TodoGet");
+            setTodos(result);
+        })()
 
-
-    }, [type])
+    }, [setTodos, type])
 
     const { a, b, c, d } = useMemo(() => {
         return todos.reduce<{
@@ -25,7 +28,7 @@ export default function Quadrants() {
             c: Todo[];
             d: Todo[]
         }>((all: { a: Todo[]; b: Todo[]; c: Todo[]; d: Todo[]; }, cur: Todo) => {
-            switch (cur.quadrant) {
+            switch (cur.priority) {
                 case Quadrant.First:
                     all.a.push(cur)
                     break;

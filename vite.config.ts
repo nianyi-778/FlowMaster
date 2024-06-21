@@ -87,6 +87,7 @@ export default defineConfig(({ command }: ConfigEnv): UserConfig => {
     resolve: {
       alias: {
         "@": "/src",
+        $electron: "/electron",
       },
     },
   };

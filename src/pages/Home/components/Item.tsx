@@ -3,9 +3,9 @@ import Modal from '@/components/Modal';
 import { useTodoStore } from '@/store'
 import type { CheckboxProps } from 'antd';
 
-export default function Item({ title, describe, id }: { title: string, describe?: string; id: string }) {
+export default function Item({ title, description, id }: { title: string, description?: string; id: number }) {
     const setCurrent = useTodoStore((state) => state.setCurrent)
-    console.log(describe, 'describe');
+    console.log(description, 'describe');
     const onChange: CheckboxProps['onChange'] = (e) => {
         console.log(`checked = ${e.target.checked}`);
 

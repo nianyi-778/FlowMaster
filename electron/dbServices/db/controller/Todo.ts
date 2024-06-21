@@ -17,4 +17,12 @@ export class TodoController {
       : TodoServices.addUser({ description, title, priority });
     return res;
   }
+
+  static getTodoList() {
+    return TodoServices.getTodoList();
+  }
+
+  static getTodo(id: number) {
+    return TodoServices.getTodo(id);
+  }
 }

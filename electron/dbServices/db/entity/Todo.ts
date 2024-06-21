@@ -20,6 +20,10 @@ export const Todo = new EntitySchema({
       type: Number,
       nullable: true,
     },
+    updateTime: {
+      type: Number,
+      nullable: true,
+    },
     // type: {
     //   type: Number,
     //   enum: [1, 2, 3, 4],

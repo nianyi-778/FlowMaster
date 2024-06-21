@@ -1,10 +1,11 @@
 import { ipcMain } from "electron";
 import { CreateWin, CreateWinName, WinClosed, WinClosedName } from "./createWin";
-import { TodoCurd, TodoCurdName } from "./todoCurd";
+import { TodoAddOrUpdate, TodoCurdName, TodoGetName, TodoGet } from "./todoCurd";
 
 // ipc 注入
 export function ipcInject() {
   ipcMain.on(CreateWinName, CreateWin);
-  ipcMain.on(TodoCurdName, TodoCurd);
+  ipcMain.on(TodoCurdName, TodoAddOrUpdate);
+  ipcMain.handle(TodoGetName, TodoGet);
   ipcMain.on(WinClosedName, WinClosed);
 }

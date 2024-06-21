@@ -1,4 +1,3 @@
-// import { EntityManager } from "typeorm";
 import { Quadrant } from "../../../ipc/todoCurd";
 import { dataSource } from "../dbInit";
 import { Todo } from "../entity/Todo";
@@ -34,13 +33,35 @@ export class todoDao {
   }
   async updateTodo({
     id,
-    userName,
-    nickName,
+    description,
+    title,
+    priority,
   }: {
     id?: number;
-    userName: string;
-    nickName: string;
+    description: string;
+    title: string;
+    priority?: Quadrant;
   }) {
-    return await this.repository.update({ id }, { userName, nickName });
+    return await this.repository.update({ id }, { description, title, priority });
+  }
+
+  async getTodoList() {
+    // 查列表
+    const listResult = await this.repository.find({
+      where: {
+        isDeleted: 0,
+      },
+    });
+
+    return listResult;
+  }
+
+  getTodoById(id: number) {
+    return this.repository.findOne({
+      where: {
+        isDeleted: 0,
+        id,
+      },
+    });
   }
 }

@@ -9,14 +9,14 @@ type State = {
 type Actions = {
   setTodoList: (data: Todo[]) => void;
   updateTodo: (data: Todo) => void;
-  setCurrent: (id: string) => void;
+  setCurrent: (id: number) => void;
 };
 
 export const useTodoStore = create<State & Actions>()(
   immer((set) => ({
     list: [],
     current: null,
-    setCurrent: (id: string) =>
+    setCurrent: (id: number) =>
       set((state) => {
         state.current = state.list.find((s) => s.id === id);
       }),

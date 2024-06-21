@@ -15,16 +15,26 @@ export interface TodoItem {
   id?: number;
 }
 
+export type TypeEnum = "findAll" | "findById" | "create" | "update" | "delete";
+
 type Todo = TodoItem;
 export const TodoCurdName = "TodoCurd";
+export const TodoGetName = "TodoGet";
 
-export function TodoCurd(_event: IpcMainInvokeEvent, todo: Todo) {
+export async function TodoAddOrUpdate(_event: IpcMainInvokeEvent, todo: Todo) {
   console.log(todo);
   const { title, description, priority, id } = todo;
-  TodoController.addOrUpdate({
+  return await TodoController.addOrUpdate({
     title,
     description,
     id,
     priority,
   });
+}
+
+export function TodoGet(_event: IpcMainInvokeEvent, { id }: { id?: number }) {
+  if (id) {
+    return TodoController.getTodo(id);
+  }
+  return TodoController.getTodoList();
 }

@@ -1,11 +1,12 @@
 export interface Todo {
-  id: string;
+  id: number;
   title: string;
-  describe?: string;
-  done: boolean;
-  end_time?: number;
-  quadrant: Quadrant;
-  updated_at?: number;
+  description: string;
+  status: 0 | 1;
+  deadline?: number;
+  priority: Quadrant;
+  isDeleted: 0 | 1;
+  updateTime?: number;
 }
 
 export enum Quadrant {
