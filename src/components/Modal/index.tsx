@@ -1,5 +1,6 @@
-import { CSSProperties, ReactNode, useCallback } from "react";
+import { CSSProperties, ReactNode, useCallback, useEffect } from "react";
 import { throttle } from 'lodash-es';
+import useAutoTodo from "@/hooks/useAutoTodo";
 
 export default function Modal(
     { children,
@@ -15,6 +16,14 @@ export default function Modal(
             children: ReactNode; classNames?: string; styles?: CSSProperties; defaultWidth?: number; defaultHeight?: number; url: string;
         }
 ) {
+    const { asyncTodoData } = useAutoTodo();
+
+    useEffect(() => {
+        window.ipcRenderer.on("win-close", () => {
+            console.log('win-close');
+            asyncTodoData();
+        });
+    }, [asyncTodoData])
 
     const onAdd = useCallback(async (event: { screenX: number; screenY: number; }) => {
         await onFirstClick?.();
@@ -29,7 +38,7 @@ export default function Modal(
         if (newX + defaultWidth > screenWidth) {
             newX = x - space - defaultWidth;
         }
-        window.ipcRenderer.send("CreateWin", {
+        window.ipcRenderer.invoke("CreateWin", {
             url,
             options: {
                 "width": defaultWidth,

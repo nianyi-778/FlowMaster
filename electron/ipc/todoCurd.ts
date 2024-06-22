@@ -22,7 +22,6 @@ export const TodoCurdName = "TodoCurd";
 export const TodoGetName = "TodoGet";
 
 export async function TodoAddOrUpdate(_event: IpcMainInvokeEvent, todo: Todo) {
-  console.log(todo);
   const { title, description, priority, id } = todo;
   return await TodoController.addOrUpdate({
     title,
@@ -32,7 +31,7 @@ export async function TodoAddOrUpdate(_event: IpcMainInvokeEvent, todo: Todo) {
   });
 }
 
-export function TodoGet(_event: IpcMainInvokeEvent, { id }: { id?: number }) {
+export function TodoGet(_event: IpcMainInvokeEvent, id?: number) {
   if (id) {
     return TodoController.getTodo(id);
   }

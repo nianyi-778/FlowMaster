@@ -3,7 +3,8 @@ import { Input, Popover, Tooltip } from 'antd';
 import Icon from "@/components/Icon";
 import styles from './index.module.less';
 import { useParams } from 'react-router-dom';
-import { Quadrant } from "@/types/todo";
+import { Quadrant, Todo } from "@/types/todo";
+import { parseInt } from "lodash-es";
 
 const { TextArea } = Input;
 
@@ -32,7 +33,7 @@ const levels = [
 
 export default function AddTodo() {
     const { type = Quadrant.Third, id } = useParams();
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<Todo | null>(null);
     const [curLevel, setLevel] = useState<Quadrant>(+type);
     const [open, setOpen] = useState(false);
     const curLevelIndex = levels.findIndex(l => l.level === curLevel);
@@ -40,13 +41,30 @@ export default function AddTodo() {
     const [describe, setDescribe] = useState<string>();
 
     useEffect(() => {
+        if (id) {
+            (async () => {
+                const result = await window.ipcRenderer.invoke("TodoGet", id) as Todo;
+                ref.current = result;
+                setTitle(result.title);
+                setDescribe(result.description)
+            })()
+        }
+    }, [id]);
+
+    useEffect(() => {
+
+
         const handleBeforeUnload = () => {
-            window.ipcRenderer.send("TodoCurd", {
-                title,
-                description: describe,
-                priority: curLevel,
-                id
-            });
+            if (ref.current) {
+                if (ref.current.title !== title || ref.current.description !== describe || ref.current.priority !== curLevel) {
+                    window.ipcRenderer.send("TodoCurd", {
+                        title,
+                        description: describe,
+                        priority: curLevel,
+                        id: id ? parseInt(id, 10) : null
+                    });
+                }
+            }
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
 
@@ -82,7 +100,7 @@ export default function AddTodo() {
         </p>)
     }</div>
 
-    return <div ref={ref} className=" w-full h-full bg-white ">
+    return <div className=" w-full h-full bg-white ">
         <div className=" flex justify-between items-center px-[20px] h-[44px] border-b-[#f2f2f2] border-b">
             <span>设置日期</span>
             <Popover content={content}

@@ -1,25 +1,15 @@
-import { useParams } from "react-router-dom"
 import { useMemo } from "react";
 import styles from './index.module.less';
 import { PlusOutlined } from "@ant-design/icons";
-import { useEffect } from 'react';
 import { Quadrant, Todo } from '@/types/todo';
 import QuadrantsItem from "./components/QuadrantsItem";
 import Modal from '@/components/Modal';
 import { useTodoStore } from '@/store/todo';
+import useAutoTodo from "@/hooks/useAutoTodo";
 
 export default function Quadrants() {
-    const { type = 1 } = useParams();
     const todos = useTodoStore((state: { list: Todo[] }) => state.list);
-    const setTodos = useTodoStore((state: { setTodoList: (x: Todo[]) => void; }) => state.setTodoList);
-
-    useEffect(() => {
-        (async () => {
-            const result = await window.ipcRenderer.invoke("TodoGet");
-            setTodos(result);
-        })()
-
-    }, [setTodos, type])
+    useAutoTodo();
 
     const { a, b, c, d } = useMemo(() => {
         return todos.reduce<{

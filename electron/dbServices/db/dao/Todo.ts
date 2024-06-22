@@ -29,7 +29,7 @@ export class todoDao {
     title: string;
     priority?: Quadrant;
   }) {
-    return await this.repository.insert({ description, title, priority });
+    return await this.repository.insert({ description, title, priority, updateTime: Date.now() });
   }
   async updateTodo({
     id,
@@ -42,7 +42,10 @@ export class todoDao {
     title: string;
     priority?: Quadrant;
   }) {
-    return await this.repository.update({ id }, { description, title, priority });
+    return await this.repository.update(
+      { id },
+      { description, title, priority, updateTime: Date.now() }
+    );
   }
 
   async getTodoList() {

@@ -31,8 +31,10 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
   top &&
     top.once("focus", () => {
       child.close();
+      child.webContents.send("win-close");
     });
 }
+
 
 export const WinClosedName = "WinClosed";
 // 失焦

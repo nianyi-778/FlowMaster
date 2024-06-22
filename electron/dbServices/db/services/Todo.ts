@@ -26,6 +26,7 @@ export class TodoServices {
     title: string;
     priority?: Quadrant;
   }) {
+    console.log(id, description, title, priority);
     return todoDao.getInstance().updateTodo({
       id,
       title,

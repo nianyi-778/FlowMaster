@@ -21,4 +21,5 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     return ipcRenderer.invoke(channel, ...omit);
   },
   // You can expose other APTs you need here.
+  // winClose: (callback: () => void) => ipcRenderer.on("win-close", () => callback()),
 });
