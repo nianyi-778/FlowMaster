@@ -13,6 +13,7 @@ export interface TodoItem {
   description: string;
   priority: Quadrant;
   id?: number;
+  status?: 1 | 0;
 }
 
 export type TypeEnum = "findAll" | "findById" | "create" | "update" | "delete";
@@ -22,12 +23,13 @@ export const TodoCurdName = "TodoCurd";
 export const TodoGetName = "TodoGet";
 
 export async function TodoAddOrUpdate(_event: IpcMainInvokeEvent, todo: Todo) {
-  const { title, description, priority, id } = todo;
+  const { title, description, priority, id, status } = todo;
   return await TodoController.addOrUpdate({
     title,
     description,
     id,
     priority,
+    status,
   });
 }
 

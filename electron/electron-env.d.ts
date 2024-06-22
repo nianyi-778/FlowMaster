@@ -22,7 +22,7 @@ declare namespace NodeJS {
 }
 
 // interface IpcRendererExtend extends import("electron").IpcRenderer {
-//   createWin: (x: CreateWin) => void;
+//   sendMessage: (x: string) => void;
 // }
 
 // Used in Renderer process, expose in `preload.ts`

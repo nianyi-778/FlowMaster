@@ -7,8 +7,11 @@ export default function Item({ title, description, id }: { title: string, descri
     const setCurrent = useTodoStore((state) => state.setCurrent)
     console.log(description, 'describe');
     const onChange: CheckboxProps['onChange'] = (e) => {
-        console.log(`checked = ${e.target.checked}`);
-
+        const checked = e.target.checked
+        window.ipcRenderer.send("TodoCurd", {
+            status: checked,
+            id: id
+        });
     };
 
     return <div className={`h-[40px] hover:bg-[#f8f8f8] rounded-md leading-[40px] px-[12px] cursor-default`}>
@@ -21,8 +24,8 @@ export default function Item({ title, description, id }: { title: string, descri
             </Modal>
             <div className=" right-0 pl-[6px] ">
                 {/* Mask */}
-                <span className=" text-[#949494] text-[12px]">收集箱</span>
-                <span className=" text-[#949494] text-[12px] ml-[4px]">5月15日</span>
+                <span className=" text-[#949494] text-[12px] inline-block">收集箱</span>
+                <span className=" text-[#949494] text-[12px] ml-[4px] inline-block">5月15日</span>
             </div>
         </div>
     </div>

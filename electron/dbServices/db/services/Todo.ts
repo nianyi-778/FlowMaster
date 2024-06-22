@@ -12,6 +12,7 @@ export class TodoServices {
   }
 
   static async addUser(todo: { description: string; title: string; priority?: Quadrant }) {
+    console.log(todo, "add");
     const res = await todoDao.getInstance().insertTodo(todo);
     return res;
   }
@@ -20,18 +21,21 @@ export class TodoServices {
     description,
     title,
     priority,
+    status,
   }: {
+    status?: 0 | 1;
     id: number;
     description: string;
     title: string;
     priority?: Quadrant;
   }) {
-    console.log(id, description, title, priority);
+    console.log(id, description, title, priority, status);
     return todoDao.getInstance().updateTodo({
       id,
       title,
       description,
       priority,
+      status,
     });
   }
 }

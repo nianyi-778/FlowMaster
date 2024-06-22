@@ -36,16 +36,28 @@ export class todoDao {
     description,
     title,
     priority,
+    status,
   }: {
-    id?: number;
+    id: number;
     description: string;
     title: string;
     priority?: Quadrant;
+    status?: 0 | 1;
   }) {
-    return await this.repository.update(
-      { id },
-      { description, title, priority, updateTime: Date.now() }
-    );
+    const item = await this.getTodoById(id);
+    if (item) {
+      return await this.repository.update(
+        { id },
+        {
+          description,
+          title,
+          priority,
+          updateTime: Date.now(),
+          status,
+        }
+      );
+    }
+    return null;
   }
 
   async getTodoList() {

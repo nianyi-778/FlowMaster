@@ -6,14 +6,16 @@ export class TodoController {
     title,
     priority,
     description,
+    status,
   }: {
+    status?: 0 | 1;
     id?: number;
     title: string;
     description: string;
     priority: Quadrant;
   }) {
     const res = id
-      ? await TodoServices.updateUser({ id, title, description, priority })
+      ? await TodoServices.updateUser({ id, title, description, priority, status })
       : TodoServices.addUser({ description, title, priority });
     return res;
   }

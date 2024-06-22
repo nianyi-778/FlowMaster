@@ -47,24 +47,25 @@ export default function AddTodo() {
                 ref.current = result;
                 setTitle(result.title);
                 setDescribe(result.description)
+                setLevel(result.priority);
             })()
         }
     }, [id]);
 
     useEffect(() => {
-
-
         const handleBeforeUnload = () => {
             if (ref.current) {
-                if (ref.current.title !== title || ref.current.description !== describe || ref.current.priority !== curLevel) {
-                    window.ipcRenderer.send("TodoCurd", {
-                        title,
-                        description: describe,
-                        priority: curLevel,
-                        id: id ? parseInt(id, 10) : null
-                    });
+                if (ref.current.title === title && ref.current.description === describe && ref.current.priority === curLevel) {
+                    return;
                 }
             }
+            window.ipcRenderer.send("TodoCurd", {
+                title,
+                description: describe,
+                priority: curLevel,
+                id: id ? parseInt(id, 10) : null
+            });
+
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
 

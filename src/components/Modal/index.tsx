@@ -1,6 +1,5 @@
-import { CSSProperties, ReactNode, useCallback, useEffect } from "react";
+import { CSSProperties, ReactNode, useCallback } from "react";
 import { throttle } from 'lodash-es';
-import useAutoTodo from "@/hooks/useAutoTodo";
 
 export default function Modal(
     { children,
@@ -16,14 +15,6 @@ export default function Modal(
             children: ReactNode; classNames?: string; styles?: CSSProperties; defaultWidth?: number; defaultHeight?: number; url: string;
         }
 ) {
-    const { asyncTodoData } = useAutoTodo();
-
-    useEffect(() => {
-        window.ipcRenderer.on("win-close", () => {
-            console.log('win-close');
-            asyncTodoData();
-        });
-    }, [asyncTodoData])
 
     const onAdd = useCallback(async (event: { screenX: number; screenY: number; }) => {
         await onFirstClick?.();
@@ -47,7 +38,6 @@ export default function Modal(
                 y: newY,
             }
         })
-
     }, [defaultHeight, defaultWidth, onFirstClick, url])
 
     return <span onClick={throttle(onAdd, 500)} className={`${classNames}`} style={styles}>

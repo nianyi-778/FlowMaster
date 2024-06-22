@@ -15,9 +15,9 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
   // 创建窗口
   const child = new BrowserWindow({
     parent: top ? top : undefined,
-    show: false,
+    show: true,
     movable: false,
-    transparent: true,
+    transparent: false,
     frame: false,
     resizable: false,
     webPreferences,
@@ -28,13 +28,16 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
   child.once("ready-to-show", () => {
     child.show();
   });
+
   top &&
     top.once("focus", () => {
+      top.webContents.send("win-close-before");
       child.close();
-      child.webContents.send("win-close");
+      top.webContents.send("win-close-after");
     });
-}
 
+  return true;
+}
 
 export const WinClosedName = "WinClosed";
 // 失焦

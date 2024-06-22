@@ -66,8 +66,8 @@ export default function Quadrants() {
                 <div className={`${styles.item} bg-white relative flex group flex-col p-[10px] border-[1px] border-transparent aspect-w-1 aspect-h-1  hover:bg-[rgba(255,255,255,.5)]`}>
                     <div className=" overflow-hidden flex  flex-col h-full ">
                         <h2 className="  font-bold no-select flex justify-between  h-[24px]">
-                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white text-[#eab308]"> 重要不紧急</span>
-                            <Modal url={`/addTodo/${Quadrant.NumberFour}`}>
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['Ⅱ'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#eab308] before:text-white text-[#eab308]"> 重要不紧急</span>
+                            <Modal url={`/addTodo/${Quadrant.Second}`}>
                                 <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  p-[4px]  flex items-center justify-center hover:bg-[#f2f2f2]" />
                             </Modal>
                         </h2>
@@ -81,8 +81,8 @@ export default function Quadrants() {
                 <div className={`${styles.item} bg-white relative flex group flex-col p-[10px] aspect-w-1 border-[1px] border-transparent aspect-h-1  hover:bg-[rgba(255,255,255,.5)]`}>
                     <div className=" overflow-hidden flex  flex-col h-full ">
                         <h2 className="  font-bold no-select flex justify-between  h-[24px]">
-                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white text-[#3b82f6]"> 不重要但紧急</span>
-                            <Modal url={`/addTodo/${Quadrant.Second}`}>
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['Ⅲ'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#3b82f6] before:text-white text-[#3b82f6]"> 不重要但紧急</span>
+                            <Modal url={`/addTodo/${Quadrant.Third}`}>
                                 <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191]  p-[4px]  flex items-center justify-center hover:bg-[#f2f2f2]" />
                             </Modal>
                         </h2>
@@ -95,8 +95,8 @@ export default function Quadrants() {
                 <div className={`${styles.item} p-[10px] relative bg-white flex group flex-col aspect-w-1 border-[1px] border-transparent aspect-h-1  hover:bg-[rgba(255,255,255,.5)]`}>
                     <div className=" overflow-hidden flex  flex-col h-full ">
                         <h2 className="  font-bold no-select flex justify-between  h-[24px]">
-                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['I'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white text-[#22c55e]"> 不重要不紧急</span>
-                            <Modal url={`/addTodo/${Quadrant.Third}`}>
+                            <span className=" before:text-center before:leading-[20px] before:text-[14px] before:content-['Ⅳ'] before:inline-block before:w-[20px] before:h-[20px] before:rounded-[50%] before:bg-[#22c55e] before:text-white text-[#22c55e]"> 不重要不紧急</span>
+                            <Modal url={`/addTodo/${Quadrant.NumberFour}`}>
                                 <PlusOutlined className="group-hover:visible transition-all add_icon invisible cursor-pointer   text-[#919191] p-[4px]  flex items-center justify-center hover:bg-[#f2f2f2]" />
                             </Modal>
                         </h2>

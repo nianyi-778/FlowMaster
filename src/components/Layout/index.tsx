@@ -2,8 +2,18 @@
 import { Outlet } from 'react-router-dom';
 import LeftMenu from './LeftMenu';
 import Title from './Title';
+import { useEffect } from 'react';
+import useAutoTodo from '@/hooks/useAutoTodo';
 
 export default function Layout() {
+    const { asyncTodoData } = useAutoTodo();
+
+    useEffect(() => {
+        window.ipcRenderer.on("win-close-after", (url) => {
+            console.log('win-close-before', url);
+            asyncTodoData();
+        });
+    }, [])
 
     return <div className=' w-lvh h-lvh '>
         <div className=' w-full h-[31px] bg-[#f8faff]' >
