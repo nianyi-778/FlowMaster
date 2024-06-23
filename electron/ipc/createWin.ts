@@ -31,9 +31,7 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
 
   top &&
     top.once("focus", () => {
-      top.webContents.send("win-close-before");
       child.close();
-      top.webContents.send("win-close-after");
     });
 
   return true;

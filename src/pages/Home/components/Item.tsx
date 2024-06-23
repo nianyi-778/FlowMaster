@@ -3,9 +3,9 @@ import Modal from '@/components/Modal';
 import { useTodoStore } from '@/store'
 import type { CheckboxProps } from 'antd';
 
-export default function Item({ title, description, id }: { title: string, description?: string; id: number }) {
+export default function Item({ title, id }: { title: string, id: number }) {
     const setCurrent = useTodoStore((state) => state.setCurrent)
-    console.log(description, 'describe');
+    console.log(title, 'title');
     const onChange: CheckboxProps['onChange'] = (e) => {
         const checked = e.target.checked
         window.ipcRenderer.send("TodoCurd", {
@@ -19,13 +19,13 @@ export default function Item({ title, description, id }: { title: string, descri
             <Checkbox onChange={onChange}></Checkbox>
             <Modal onFirstClick={async () => {
                 setCurrent(id);
-            }} url={`/updateTodo/${id}`} classNames="flex-1">
+            }} url={`/updateTodo/${id}`} classNames="flex-1 overflow-hidden">
                 <p className={`ml-[6px]  overflow-hidden truncate `}>{title}</p>
             </Modal>
             <div className=" right-0 pl-[6px] ">
                 {/* Mask */}
                 <span className=" text-[#949494] text-[12px] inline-block">收集箱</span>
-                <span className=" text-[#949494] text-[12px] ml-[4px] inline-block">5月15日</span>
+                {/* <span className=" text-[#949494] text-[12px] ml-[4px] inline-block">5月15日</span> */}
             </div>
         </div>
     </div>

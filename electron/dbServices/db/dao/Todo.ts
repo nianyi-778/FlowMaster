@@ -1,6 +1,7 @@
 import { Quadrant } from "../../../ipc/todoCurd";
 import { dataSource } from "../dbInit";
 import { Todo } from "../entity/Todo";
+import { ObjectLiteral } from "typeorm";
 export class todoDao {
   static instance: todoDao;
   repository;
@@ -49,11 +50,11 @@ export class todoDao {
       return await this.repository.update(
         { id },
         {
-          description,
-          title,
-          priority,
+          description: description || item.description,
+          title: title || item.title,
+          priority: priority || item.priority,
           updateTime: Date.now(),
-          status,
+          status: status || item.status,
         }
       );
     }
@@ -71,7 +72,7 @@ export class todoDao {
     return listResult;
   }
 
-  getTodoById(id: number) {
+  getTodoById(id: number): Promise<ObjectLiteral | null> {
     return this.repository.findOne({
       where: {
         isDeleted: 0,

@@ -9,11 +9,11 @@ export default function Layout() {
     const { asyncTodoData } = useAutoTodo();
 
     useEffect(() => {
-        window.ipcRenderer.on("win-close-after", (url) => {
-            console.log('win-close-before', url);
+        window.ipcRenderer.on("win-close-after", () => {
+            console.log('win-close-after');
             asyncTodoData();
         });
-    }, [])
+    }, [asyncTodoData])
 
     return <div className=' w-lvh h-lvh '>
         <div className=' w-full h-[31px] bg-[#f8faff]' >

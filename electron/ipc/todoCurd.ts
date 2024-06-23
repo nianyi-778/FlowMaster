@@ -1,4 +1,4 @@
-import { IpcMainInvokeEvent } from "electron";
+import { BrowserWindow, IpcMainInvokeEvent } from "electron";
 import { TodoController } from "../dbServices/db/controller/Todo";
 
 export enum Quadrant {
@@ -24,13 +24,18 @@ export const TodoGetName = "TodoGet";
 
 export async function TodoAddOrUpdate(_event: IpcMainInvokeEvent, todo: Todo) {
   const { title, description, priority, id, status } = todo;
-  return await TodoController.addOrUpdate({
+  const result = await TodoController.addOrUpdate({
     title,
     description,
     id,
     priority,
     status,
   });
+  const top = BrowserWindow.getFocusedWindow();
+  if (top) {
+    await top.webContents.send("win-close-after");
+  }
+  return result;
 }
 
 export function TodoGet(_event: IpcMainInvokeEvent, id?: number) {

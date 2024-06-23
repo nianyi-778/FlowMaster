@@ -10,7 +10,7 @@ export default function QuadrantsItem({ data }: { data: Todo[] }) {
             label: <p className=" text-[14px]"><span className=" font-bold">收集箱</span> <span className=" text-[#ccc]">{data.length}</span></p>,
             children: <div>
                 {
-                    data.map(d => <Item key={d.id} id={d.id} title={d.title} description={d.description} />)
+                    data.map(d => <Item key={d.id} id={d.id} title={d.title} />)
                 }
             </div>,
         },
