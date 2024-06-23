@@ -3,20 +3,20 @@ import Modal from '@/components/Modal';
 import { useTodoStore } from '@/store'
 import type { CheckboxProps } from 'antd';
 
-export default function Item({ title, id }: { title: string, id: number }) {
+export default function Item({ title, id, status }: { title: string, id: number; status: 0 | 1 }) {
     const setCurrent = useTodoStore((state) => state.setCurrent)
-    console.log(title, 'title');
+    //  #d1d1d1  
     const onChange: CheckboxProps['onChange'] = (e) => {
         const checked = e.target.checked
         window.ipcRenderer.send("TodoCurd", {
-            status: checked,
+            status: checked ? 1 : 0,
             id: id
         });
     };
 
     return <div className={`h-[40px] hover:bg-[#f8f8f8] rounded-md leading-[40px] px-[12px] cursor-default`}>
         <div className="flex h-full">
-            <Checkbox onChange={onChange}></Checkbox>
+            <Checkbox onChange={onChange} checked={!!status}></Checkbox>
             <Modal onFirstClick={async () => {
                 setCurrent(id);
             }} url={`/updateTodo/${id}`} classNames="flex-1 overflow-hidden">

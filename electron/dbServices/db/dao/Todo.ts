@@ -54,7 +54,7 @@ export class todoDao {
           title: title || item.title,
           priority: priority || item.priority,
           updateTime: Date.now(),
-          status: status || item.status,
+          status: typeof status === "number" ? status : item.status,
         }
       );
     }

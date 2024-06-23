@@ -5,6 +5,7 @@ import styles from './index.module.less';
 import { useParams } from 'react-router-dom';
 import { Quadrant, Todo } from "@/types/todo";
 import { parseInt } from "lodash-es";
+import { CheckOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 
@@ -89,16 +90,25 @@ export default function AddTodo() {
     }
 
     const content = <div className=" w-[130px]">{
-        levels.map(level => <p onClick={() => {
-            setLevel(level.level);
-            setOpen(false);
-        }}
-            className={` cursor-pointer leading-[30px] flex items-center hover:bg-[#f7f7f7] px-[12px]`}
-            key={level.level}>
-            <Icon styles={{
-                color: level.color
-            }} classNames={`text-[16px] mr-[4px]`} name="icon-hongqi"></Icon>{level.label}优先级
-        </p>)
+        levels.map(level => {
+            const active = curLevel === level.level;
+
+            return <p onClick={() => {
+                setLevel(level.level);
+                setOpen(false);
+            }}
+                className={` cursor-pointer leading-[30px] flex items-center hover:bg-[#f7f7f7] px-[12px] ${active ? 'text-[#4772fa]' : ''}`}
+                key={level.level}>
+                <Icon styles={{
+                    color: level.color
+                }} classNames={`text-[16px] mr-[4px]`} name="icon-hongqi"></Icon>{level.label}优先级
+
+                {
+                    active ? <CheckOutlined className=" ml-[16px]" /> : null
+                }
+
+            </p>
+        })
     }</div>
 
     return <div className=" w-full h-full bg-white ">
@@ -110,7 +120,7 @@ export default function AddTodo() {
                 onOpenChange={handleOpenChange}
                 placement="bottomLeft" trigger="click">
                 <Tooltip title="优先级">
-                    <span className=" cursor-pointer">
+                    <span className=" cursor-pointer hover:bg-[#f1f1f1] px-[6px] rounded">
                         <Icon name="icon-hongqi" classNames={`text-[20px]`} styles={{
                             color: levels[curLevelIndex]?.color
                         }}></Icon>
