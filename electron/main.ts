@@ -49,8 +49,8 @@ function createWindow() {
     minHeight: 600,
     show: true,
     titleBarStyle: "hidden",
+    backgroundColor: "transparent",
     transparent: false,
-    backgroundColor: "#00000000",
     frame: false,
     resizable: true,
     titleBarOverlay: {

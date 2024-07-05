@@ -20,15 +20,25 @@ export default function Modal(
         await onFirstClick?.();
 
         const space = 20;
-        const x = event.screenX;
-        const y = event.screenY;
-        const { width: screenWidth } = window.screen;
+        let x = event.screenX;
+        let y = event.screenY;
+        const { width: screenWidth, height: screenHeight } = window.screen;
+        if (x < 0) {
+            // 说明在副屏
+            x += screenWidth;
+        }
+        if (y < 0) {
+            // 说明在副屏
+            y = y + screenHeight;
+        }
+
         let newX = x + space;
         const newY = y - space;
-
-        if (newX + defaultWidth > screenWidth) {
+        console.log(x + screenWidth, y, screenWidth);
+        if ((newX + defaultWidth) > screenWidth) {
             newX = x - space - defaultWidth;
         }
+        console.log(newX, 'newx');
         window.ipcRenderer.invoke("CreateWin", {
             url,
             options: {

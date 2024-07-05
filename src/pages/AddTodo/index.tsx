@@ -60,6 +60,9 @@ export default function AddTodo() {
                     return;
                 }
             }
+            if (!title) {
+                return;
+            }
             window.ipcRenderer.send("TodoCurd", {
                 title,
                 description: describe,
