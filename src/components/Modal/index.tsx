@@ -33,10 +33,13 @@ export default function Modal(
         }
 
         let newX = x + space;
-        const newY = y - space;
+        let newY = y - space;
         console.log(x + screenWidth, y, screenWidth);
         if ((newX + defaultWidth) > screenWidth) {
             newX = x - space - defaultWidth;
+        }
+        if ((newY + defaultHeight) > screenHeight) {
+            newY = y - space - defaultHeight;
         }
         console.log(newX, 'newx');
         window.ipcRenderer.invoke("CreateWin", {

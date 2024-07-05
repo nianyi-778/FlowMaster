@@ -45,9 +45,9 @@ function createWindow() {
     width: 800,
     height: 600,
     title: "磨刀不误砍柴工",
-    minWidth: 800,
-    minHeight: 600,
-    show: true,
+    minWidth: 630,
+    minHeight: 462,
+    show: false,
     titleBarStyle: "hidden",
     backgroundColor: "transparent",
     transparent: false,
@@ -62,6 +62,7 @@ function createWindow() {
 
   // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {
+    win?.show();
     win?.webContents.send("main-process-message", new Date().toLocaleString());
   });
 

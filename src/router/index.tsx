@@ -2,6 +2,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "@/pages/Home";
 import Layout from "@/components/Layout";
 import AddTodo from "@/pages/AddTodo";
+import TodoItemMenu from "@/pages/TodoItemMenu";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "updateTodo/:id",
         element: <AddTodo />
+      },
+      {
+        path: "todoItemMenu/:id",
+        element: <TodoItemMenu />
       }
     ]
   },
