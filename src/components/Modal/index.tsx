@@ -4,7 +4,7 @@ import { throttle } from 'lodash-es';
 export default function Modal(
     { children,
         onFirstClick,
-        classNames,
+        classNames = '',
         styles = {},
         defaultWidth = 400,
         defaultHeight = 300,

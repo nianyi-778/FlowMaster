@@ -58,8 +58,7 @@ function createWindow() {
     minHeight: 462,
     show: false,
     titleBarStyle: "hidden",
-    backgroundColor: "transparent",
-    transparent: true,
+    transparent: isMac,
     frame: false,
     resizable: true,
     titleBarOverlay: {
