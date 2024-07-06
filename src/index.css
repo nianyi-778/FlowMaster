@@ -29,7 +29,8 @@
 html,
 body {
   background: transparent;
-  border-radius: 20px;
+  border-radius: 10px;
   perspective: 800px;
   -webkit-user-select: none;
+  border: 1px solid red;
 }

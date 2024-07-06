@@ -59,7 +59,7 @@ function createWindow() {
     show: false,
     titleBarStyle: "hidden",
     backgroundColor: "transparent",
-    transparent: false,
+    transparent: true,
     frame: false,
     resizable: true,
     titleBarOverlay: {
