@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 // import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { mainInitHand } from "./dbServices/dbServicesInit";
@@ -37,7 +37,16 @@ export const webPreferences = {
   preload: path.join(__dirname, "preload.mjs"),
 };
 
-// const isMac = process.platform === "darwin";
+const dockMenu = Menu.buildFromTemplate([
+  {
+    label: "高级",
+    click() {
+      console.log("New Window");
+    },
+  },
+]);
+
+const isMac = process.platform === "darwin";
 
 function createWindow() {
   mainInitHand();
@@ -101,7 +110,14 @@ app.on("activate", () => {
   }
 });
 
-app.whenReady().then(() => {
-  ipcInject();
-  createWindow();
-});
+app
+  .whenReady()
+  .then(() => {
+    if (isMac) {
+      app.dock.setMenu(dockMenu);
+    }
+  })
+  .then(() => {
+    ipcInject();
+    createWindow();
+  });
