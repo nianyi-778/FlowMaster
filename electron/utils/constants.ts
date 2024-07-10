@@ -1,4 +1,4 @@
-export const APP_NAME = "modao";
+export const APP_NAME = "FlowMaster";
 
 export const DB_CONFIG = {
   dataBaseUrl: "db/sqlite.db",

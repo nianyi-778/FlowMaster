@@ -14,7 +14,7 @@ export default function Item({ title, id, status, priority }: { title: string, i
     useEffect(() => {
         if (show) {
             const defaultWidth = 200;
-            const defaultHeight = 500;
+            const defaultHeight = 310;
             let { x, y } = anchorPoint;
             const space = 20;
             const { width: screenWidth, height: screenHeight } = window.screen;

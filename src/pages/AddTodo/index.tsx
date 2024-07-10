@@ -6,30 +6,10 @@ import { useParams } from 'react-router-dom';
 import { Quadrant, Todo } from "@/types/todo";
 import { parseInt } from "lodash-es";
 import { CheckOutlined } from '@ant-design/icons';
+import { levels } from "@/constants/config";
 
 const { TextArea } = Input;
 
-const levels = [
-    {
-        level: Quadrant.First,
-        label: "高",
-        color: "#c33d30"
-    },
-    {
-        level: Quadrant.NumberFour,
-        label: "中",
-        color: "#eeac3e"
-    },
-    {
-        level: Quadrant.Second,
-        label: "低",
-        color: "#5070f2"
-    }, {
-        level: Quadrant.Third,
-        label: "无",
-        color: "#999998"
-    }
-]
 
 
 export default function AddTodo() {

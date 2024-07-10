@@ -48,7 +48,9 @@ export default function LeftMenu() {
                 <Popover placement='rightBottom' content={<AboutMe />} trigger='click' overlayInnerStyle={{
                     padding: "0"
                 }}>
+                    {/* <Tooltip placement="right" title={"更多"} > */}
                     <QuestionCircleFilled className=" text-[#919298] text-[24px] hover:text-[#606266] " />
+                    {/* </Tooltip> */}
                 </Popover >
             </li>
         </ul>

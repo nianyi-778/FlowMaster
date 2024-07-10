@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from "electron";
+import { app, BrowserWindow, Menu, Tray } from "electron";
 // import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { mainInitHand } from "./dbServices/dbServicesInit";
@@ -108,10 +108,20 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
+let tray = null;
 app
   .whenReady()
   .then(() => {
+    tray = new Tray(path.join(__dirname, "../public/logo.png"));
+    tray.on("click", () => {
+      // 处理单击事件
+      console.log("单机");
+    });
+
+    tray.on("right-click", () => {
+      // 处理右键单击事件
+      console.log("邮件");
+    });
     if (isMac) {
       app.dock.setMenu(dockMenu);
     }
