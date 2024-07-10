@@ -34,7 +34,7 @@ export const webPreferences = {
   nodeIntegration: true,
   contextIsolation: true, // 禁用安全策略
   webSecurity: false, // 禁用同源策略
-  preload: path.join(__dirname, "preload.mjs"),
+  preload: path.join(MAIN_DIST, "preload.mjs"),
 };
 
 const dockMenu = Menu.buildFromTemplate([
@@ -49,7 +49,6 @@ const dockMenu = Menu.buildFromTemplate([
 const isMac = process.platform === "darwin";
 
 function createWindow() {
-  mainInitHand();
   win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -78,8 +77,9 @@ function createWindow() {
     win.loadURL(VITE_DEV_SERVER_URL);
     win.webContents.openDevTools();
   } else {
+    const url = path.join(RENDERER_DIST, "index.html");
     // win.loadFile('dist/index.html')
-    win.loadFile(path.join(RENDERER_DIST, "index.html"));
+    win.loadFile(url);
   }
   if (win) {
     // 减少显示空白窗口的时间
@@ -128,5 +128,8 @@ app
   })
   .then(() => {
     ipcInject();
+    mainInitHand();
+  })
+  .then(() => {
     createWindow();
   });

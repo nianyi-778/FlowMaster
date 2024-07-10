@@ -5,7 +5,7 @@ import {
   screen,
 } from "electron";
 import { webPreferences } from "../main";
-
+import { loadPage } from "../utils/index";
 export interface CreateWin {
   options: BrowserWindowConstructorOptions;
   url: string;
@@ -29,7 +29,8 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
     ...options,
   });
   // 加载页面
-  child.loadURL("http://localhost:5173" + url);
+  loadPage(child, url);
+  // child.loadURL("http://localhost:5173" + url);
 
   // 获取当前窗口所在显示器的信息
   const currentDisplay = screen.getDisplayMatching(child.getBounds());

@@ -1,11 +1,11 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { Outlet, createHashRouter } from "react-router-dom";
 import Home from "@/pages/Home";
 import Layout from "@/components/Layout";
 import AddTodo from "@/pages/AddTodo";
 import TodoItemMenu from "@/pages/TodoItemMenu";
 import Quest from '@/pages/Quest'
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
     element: <Outlet />,
