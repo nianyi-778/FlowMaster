@@ -52,7 +52,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
-    title: "磨刀不误砍柴工",
+    title: "master flow",
     minWidth: 630,
     minHeight: 462,
     show: false,
@@ -78,7 +78,6 @@ function createWindow() {
     win.webContents.openDevTools();
   } else {
     const url = path.join(RENDERER_DIST, "index.html");
-    // win.loadFile('dist/index.html')
     win.loadFile(url);
   }
   if (win) {
@@ -86,6 +85,7 @@ function createWindow() {
     win.once("ready-to-show", () => {
       if (win) {
         win.show();
+        win?.webContents.send("main-process-message", new Date().toLocaleString());
       }
     });
   }
