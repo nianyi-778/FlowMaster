@@ -1,8 +1,7 @@
-import { Empty } from "antd";
-
+import { Typography } from "antd";
 export default function QuadrantsEmpty() {
 
     return <span className=" h-full w-full  flex items-center justify-center">
-        <Empty description='没有任务' />
+        <Typography.Text type="secondary">没有任务</Typography.Text>
     </span>
 }
