@@ -1,9 +1,10 @@
-import { app, BrowserWindow, Menu, Tray } from "electron";
+import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
 // import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { mainInitHand } from "./dbServices/dbServicesInit";
 import path from "node:path";
 import { ipcInject } from "./ipc";
+import log from "electron-log";
 
 // const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -39,7 +40,7 @@ export const webPreferences = {
 
 const dockMenu = Menu.buildFromTemplate([
   {
-    label: "高级",
+    label: "高级 test",
     click() {
       console.log("New Window");
     },
@@ -48,11 +49,19 @@ const dockMenu = Menu.buildFromTemplate([
 
 const isMac = process.platform === "darwin";
 
+if (!VITE_DEV_SERVER_URL) {
+  // 判断如果是dev环境就将log存储在项目根目录的logs文件夹
+  log.transports.file.resolvePath = () =>
+    path.join(__dirname, `logs/${new Date().toLocaleDateString()}.log`);
+}
+// 设置log日志的格式可以去electron-log官方文档查看更多格式化
+log.transports.file.format = "[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] {text}";
+
 function createWindow() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
-    title: "master flow",
+    title: "MasterFlow",
     minWidth: 630,
     minHeight: 462,
     show: false,
@@ -112,7 +121,9 @@ let tray = null;
 app
   .whenReady()
   .then(() => {
-    tray = new Tray(path.join(__dirname, "../public/logo.png"));
+    const icon = nativeImage.createFromPath(path.join(RENDERER_DIST, "/logo.png"));
+    tray = new Tray(icon);
+    console.log(tray, "tray");
     tray.on("click", () => {
       // 处理单击事件
       console.log("单机");
@@ -122,6 +133,19 @@ app
       // 处理右键单击事件
       console.log("邮件");
     });
+
+    const contextMenu = Menu.buildFromTemplate([
+      { label: "Item1", type: "radio" },
+      { label: "Item2", type: "radio" },
+      { label: "Item3", type: "radio", checked: true },
+      { label: "Item4", type: "radio" },
+    ]);
+
+    tray.setContextMenu(contextMenu);
+
+    tray.setToolTip("This is my application");
+    tray.setTitle("This is my title");
+
     if (isMac) {
       app.dock.setMenu(dockMenu);
     }

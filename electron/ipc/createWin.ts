@@ -47,6 +47,7 @@ export function CreateWin(_event: IpcMainInvokeEvent, { options, url }: CreateWi
   child.once("ready-to-show", async () => {
     // await child.setPosition(newX, newY, true);
     child.show();
+    child?.webContents.send("main-process-message", new Date().toLocaleString());
   });
 
   console.log("当前焦点显示器的信息:");

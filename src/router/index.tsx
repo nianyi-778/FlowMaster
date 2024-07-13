@@ -43,4 +43,5 @@ export const router = createHashRouter([
       }
     ]
   },
-]);
+], {
+});

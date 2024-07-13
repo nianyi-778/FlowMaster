@@ -24,6 +24,7 @@
     "better-sqlite3": "9.6.0",
     "classnames": "2.5.1",
     "dayjs": "1.11.10",
+    "electron-log": "^5.1.5",
     "immer": "10.1.1",
     "less": "4.2.0",
     "lodash-es": "4.17.21",
