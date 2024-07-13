@@ -3,7 +3,7 @@ export interface Todo {
   title: string;
   description: string;
   status: 0 | 1;
-  deadline?: number;
+  completedTime?: number;
   priority: Quadrant;
   isDeleted: 0 | 1;
   updateTime?: number;

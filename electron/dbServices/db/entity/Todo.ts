@@ -8,7 +8,27 @@ export const Todo = new EntitySchema({
       primary: true,
       generated: true,
     },
+    parentId: {
+      type: Number,
+      nullable: true,
+    },
     title: {
+      type: String,
+      nullable: true,
+    },
+    columnName: {
+      type: String,
+      default: "未分组",
+    },
+    columnOrder: {
+      type: Number,
+      nullable: true,
+    },
+    order: {
+      type: Number,
+      nullable: true,
+    },
+    tag: {
       type: String,
       nullable: true,
     },
@@ -16,7 +36,8 @@ export const Todo = new EntitySchema({
       type: String,
       nullable: true,
     },
-    deadline: {
+    completedTime: {
+      // 结束时间
       type: Number,
       nullable: true,
     },
@@ -31,7 +52,7 @@ export const Todo = new EntitySchema({
     status: {
       type: Number,
       default: 0,
-      enum: [0, 1],
+      enum: [0, 1, 2], // 0 Normal  1 Completed  2 Archived
     },
     isDeleted: {
       type: Number,

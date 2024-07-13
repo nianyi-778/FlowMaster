@@ -29,17 +29,17 @@ export const levels = [
     color: "#c33d30",
   },
   {
-    level: Quadrant.NumberFour,
+    level: Quadrant.Second,
     label: "中",
     color: "#eeac3e",
   },
   {
-    level: Quadrant.Second,
+    level: Quadrant.Third,
     label: "低",
     color: "#5070f2",
   },
   {
-    level: Quadrant.Third,
+    level: Quadrant.NumberFour,
     label: "无",
     color: "#999998",
   },

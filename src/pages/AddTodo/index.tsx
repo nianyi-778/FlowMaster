@@ -21,11 +21,13 @@ export default function AddTodo() {
     const [title, setTitle] = useState<string>();
     const [describe, setDescribe] = useState<string>();
 
+
     useEffect(() => {
         if (id) {
             (async () => {
                 const result = await window.ipcRenderer.invoke("TodoGet", id) as Todo;
                 ref.current = result;
+                console.log(result);
                 setTitle(result.title);
                 setDescribe(result.description)
                 setLevel(result.priority);
@@ -73,8 +75,8 @@ export default function AddTodo() {
     }
 
     const content = <div className=" w-[130px]">{
-        levels.map(level => {
-            const active = curLevel === level.level;
+        levels.map((level, key) => {
+            const active = curLevelIndex === key;
 
             return <p onClick={() => {
                 setLevel(level.level);
@@ -93,6 +95,7 @@ export default function AddTodo() {
             </p>
         })
     }</div>
+
 
     return <div className=" w-full h-full bg-white ">
         <div className=" flex justify-between items-center px-[20px] h-[44px] border-b-[#f2f2f2] border-b">
