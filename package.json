@@ -17,7 +17,7 @@
     "electron:generate-icons": "electron-icon-builder --input=./public/logo.png --output=public --flatten"
   },
   "dependencies": {
-    "@ant-design/icons": "5.3.6",
+    "@ant-design/icons": "^5.3.7",
     "ahooks": "3.7.11",
     "antd": "5.18.0",
     "autoprefixer": "10.4.19",

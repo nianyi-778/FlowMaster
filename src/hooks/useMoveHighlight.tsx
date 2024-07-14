@@ -2,12 +2,15 @@ import { useEffect } from "react";
 
 
 
-export default function useMoveHighlight() {
+export default function useMoveHighlight({
+    animation = true
+}: {
+    animation?: boolean
+}) {
 
     useEffect(() => {
-        const elements = document.getElementsByClassName("element");
-        // 添加鼠标移动事件监听器
-        document.addEventListener("mousemove", function (event) {
+        function onMousemove(event: MouseEvent) {
+            const elements = document.getElementsByClassName("element");
             // 获取鼠标位置
             const mouseX = event.pageX;
             const mouseY = event.pageY;
@@ -26,7 +29,15 @@ export default function useMoveHighlight() {
                 element.style.setProperty('--x', distanceX + 'px');
                 element.style.setProperty('--y', distanceY + 'px');
             }
-        });
-    }, [])
+        }
+        if (animation) {
+            // 添加鼠标移动事件监听器
+            document.addEventListener("mousemove", onMousemove);
+        }
+
+        return () => {
+            document.removeEventListener("mousemove", onMousemove)
+        };
+    }, [animation])
 
 }

@@ -1,0 +1,105 @@
+.bg {
+  padding: 40px;
+  margin: 0;
+  background-color: #f8faff;
+  //   background: linear-gradient(90deg, #ebbd92 0, #a96aa2 58%);
+  overflow: hidden;
+}
+
+.colBox {
+  display: grid;
+  //   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    ". . .";
+}
+.activeColBox {
+  grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+  grid-auto-flow: column;
+  gap: 10px;
+  white-space: nowrap;
+  grid-template-areas: none;
+  grid-template-rows: none;
+}
+.col {
+  //   aspect-ratio: 1/1;
+  cursor: pointer;
+}
+
+.element {
+  background: #332817;
+  height: 100%;
+  position: relative;
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  &::before {
+    content: "";
+    position: absolute;
+    width: calc(100% + 3px);
+    height: calc(100% + 3px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background: radial-gradient(250px circle at var(--x) var(--y), #00dc82 0, transparent 100%);
+  }
+  .mask {
+    position: absolute;
+    inset: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    transition: all 0.5s;
+  }
+  .maskCover {
+    border-radius: 10px;
+    inset: 4px;
+    position: absolute;
+    background-size: cover; /* 调整背景图像的尺寸适应容器大小 */
+    background-position: center; /* 调整背景图像在容器中的位置 */
+  }
+  .doc {
+    position: absolute;
+    transform: translate(0, 0);
+    transition: all 0.5s;
+    padding: 10%;
+    left: 0;
+    right: 0;
+  }
+  &:not(.noHover) {
+    &:hover {
+      -webkit-backdrop-filter: blur(1px);
+      backdrop-filter: blur(1px);
+      inset: 0px;
+      .doc {
+        transform: translate(10%, 30%);
+      }
+    }
+  }
+}
+.noHover {
+  .doc {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.smallActive {
+  background: #1254cf;
+  .mask {
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+    inset: 0px;
+  }
+  .doc {
+    color: #292020;
+  }
+}
