@@ -7,11 +7,16 @@
 ## 功能
 
 1、番茄专注
-2、日历
-3、国际语言
-4、主题
-5、升级
 
+2、日历
+
+## 基础功能
+
+1、在线升级
+
+2、国际语言
+
+3、主题
 
 ## 效果图：
 ![image](https://github.com/user-attachments/assets/ef492191-93b5-41ac-9c0b-dbb4a727e0ee)
